@@ -53,5 +53,10 @@ module.exports.datastores = {
 
   },
 
+   mongodb :{
+    mongoDBConnString:'mongodb://dbuser:buylist1234@ds117899.mlab.com:17899/buy_list',
+    dbname:'buy_list'
+  },
+
 
 };
