@@ -1,25 +1,29 @@
 const dbprovider = require('../providers/mongo-db-provider');
 const config = require('../../config/datastores');
-
+mongo = require('mongodb');
 
 module.exports = function () {
 
-
-  console.log(config.mongodb);
   mongoDBConnString = config.datastores.mongodb.mongoDBConnString;
   dbname = config.datastores.mongodb.dbname;
   db = dbprovider(mongoDBConnString, dbname);
 
 
   return {
-    find: function (filter) {
-     cd.. return db.findDocuments('groups', filter)
+    find: function (id) {
+      let filterId = {'_id': mongo.ObjectID(id)}
+      return db.findDocuments('groups', filterId)
     },
+    add: function (item) {
+      return db.insertDocuments('groups', item)
+    },
+    update: function (item) {
+      return db.updateDocument('groups', item)
+    },
+    delete: function (id) {
+      let filterId = {'_id': mongo.ObjectID(id)}
+      return db.removeDocument('groups', filterId)
+    },
+ }
+}();
 
-  }
-}
-
-console.log(config);
-
-let groupservie = module.exports();
-groupservie.find({}).then(console.log);
