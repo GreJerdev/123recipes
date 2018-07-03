@@ -1,0 +1,28 @@
+{
+  "name": "recipes_api",
+  "version": "1.0.0",
+  "description": "training app for mange a list of recipes, it contains front end (as SPA) and back end",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GreJerdev/123recipes.git"
+  },
+  "keywords": [
+    "node",
+    "api"
+  ],
+  "author": "Gregory Jerusalemsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GreJerdev/123recipes/issues"
+  },
+  "homepage": "https://github.com/GreJerdev/123recipes#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.1.0",
+    "passport-jwt": "^4.0.0"
+  }
+}
