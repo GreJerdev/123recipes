@@ -162,4 +162,21 @@ CREATE TABLE `recipes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `uuid_from_bin`(b BINARY(16)) RETURNS char(36) CHARSET utf8
+    DETERMINISTIC
+BEGIN
+  DECLARE hex CHAR(32);
+  SET hex = HEX(b);
+  RETURN CONCAT(LEFT(hex, 8), '-', MID(hex, 9,4), '-', MID(hex, 13,4), '-', MID(hex, 17,4), '-', RIGHT(hex, 12));
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `uuid_to_bin`(s CHAR(36)) RETURNS binary(16)
+    DETERMINISTIC
+RETURN UNHEX(CONCAT(LEFT(s, 8), MID(s, 10, 4), MID(s, 15, 4), MID(s, 20, 4), RIGHT(s, 12)))$$
+DELIMITER ;
+
+
 -- Dump completed on 2018-10-04  0:09:44
