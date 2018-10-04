@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = class ingredient_list  {
+module.exports = class ingredient_list{
 
     constructor(){
 

@@ -1,11 +1,11 @@
 import os
 
-file_list = ['buy_list_to_item', 'buy_list','comment','ingredient_list','ingredient','instruction','media','recipe']
-path = 'D:/Projects/git/123recipes/recipes_api/services'
+file_list = ['buy_list_to_item', 'buy_list','comment','ingredient_list','ingredient','instruction','media','recipe','recipe_steps']
+path = 'D:/Projects/git/123recipes/recipes_api/providers'
 
 template = '''"use strict";
 
-module.exports = class %s = {
+module.exports = class %s{
 
     constructor(){
 

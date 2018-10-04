@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = class comment {
+module.exports = class comment{
 
     constructor(){
 

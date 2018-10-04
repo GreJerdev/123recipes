@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = class instruction {
+module.exports = class instruction{
 
     constructor(){
 

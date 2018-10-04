@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = class recipe {
+module.exports = class recipe{
 
     constructor(){
 
