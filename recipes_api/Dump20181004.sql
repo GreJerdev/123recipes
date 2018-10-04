@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `123-recipe` /*!40100 DEFAULT CHARACTER SET utf8 
 USE `123-recipe`;
 -- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: 123-recipe
+-- Host: localhost    Database: 123-recipe
 -- ------------------------------------------------------
 -- Server version	5.7.13-log
 
@@ -137,6 +137,23 @@ CREATE TABLE `media` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `recipe_steps`
+--
+
+DROP TABLE IF EXISTS `recipe_steps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `recipe_steps` (
+  `recipe_step_id` binary(16) NOT NULL,
+  `recipe_step_name` varchar(45) DEFAULT NULL,
+  `recipe_step_number` int(10) DEFAULT NULL,
+  `recipe_step_links` json DEFAULT NULL,
+  `recipe_step_recipe_id` binary(16) DEFAULT NULL,
+  PRIMARY KEY (`recipe_step_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `recipes`
 --
 
@@ -152,6 +169,50 @@ CREATE TABLE `recipes` (
   PRIMARY KEY (`recipe_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping routines for database '123-recipe'
+--
+/*!50003 DROP FUNCTION IF EXISTS `uuid_from_bin` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `uuid_from_bin`(b BINARY(16)) RETURNS char(36) CHARSET utf8
+    DETERMINISTIC
+BEGIN
+  DECLARE hex CHAR(32);
+  SET hex = HEX(b);
+  RETURN CONCAT(LEFT(hex, 8), '-', MID(hex, 9,4), '-', MID(hex, 13,4), '-', MID(hex, 17,4), '-', RIGHT(hex, 12));
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `uuid_to_bin` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `uuid_to_bin`(s CHAR(36)) RETURNS binary(16)
+    DETERMINISTIC
+RETURN UNHEX(CONCAT(LEFT(s, 8), MID(s, 10, 4), MID(s, 15, 4), MID(s, 20, 4), RIGHT(s, 12))) ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -162,21 +223,4 @@ CREATE TABLE `recipes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `uuid_from_bin`(b BINARY(16)) RETURNS char(36) CHARSET utf8
-    DETERMINISTIC
-BEGIN
-  DECLARE hex CHAR(32);
-  SET hex = HEX(b);
-  RETURN CONCAT(LEFT(hex, 8), '-', MID(hex, 9,4), '-', MID(hex, 13,4), '-', MID(hex, 17,4), '-', RIGHT(hex, 12));
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `uuid_to_bin`(s CHAR(36)) RETURNS binary(16)
-    DETERMINISTIC
-RETURN UNHEX(CONCAT(LEFT(s, 8), MID(s, 10, 4), MID(s, 15, 4), MID(s, 20, 4), RIGHT(s, 12)))$$
-DELIMITER ;
-
-
--- Dump completed on 2018-10-04  0:09:44
+-- Dump completed on 2018-10-04  8:37:03
