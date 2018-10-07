@@ -1,5 +1,7 @@
 'use strict';
 
+const config = require( "./configuration/config");
+const db = require("./providers/database/mysql_provider")
 const express = require('express')
 const app = express()
 const recipe = require('./controllers/recipe')

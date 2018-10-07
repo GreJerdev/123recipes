@@ -1,9 +1,9 @@
 import os
 
 file_list = ['buy_list_to_item', 'buy_list','comment','ingredient_list','ingredient','instruction','media','recipe','recipe_steps']
-path = 'D:/Projects/git/123recipes/recipes_api/providers'
+path = 'D:/Projects/git/123recipes/recipes_api/models'
 
-template = '''"use strict";
+template1 = '''"use strict";
 
 module.exports = class %s{
 
@@ -32,12 +32,23 @@ module.exports = class %s{
 
 '''
 
+template2 = '''"use strict";
+
+
+module.exports = class %s{
+
+    constructor(){
+
+    }
+}
+'''
+
 for file_name in file_list:
     full_path = os.path.join(path, '.'.join((file_name, 'js')))
     
     
     fo = open(full_path,'w')
-    file_data = template % (file_name,file_name,file_name,file_name,file_name)
+    file_data = template2 % (file_name)
     print(file_data)
     fo.write(file_data)
     fo.close()

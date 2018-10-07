@@ -1,13 +1,12 @@
 "use strict";
 
 
-module.exports = class recipe{
+module.exports = class ingredient_list{
 
     constructor(){
-        this.id = "";
-        this.parent = "";
+        this.id = 0;
         this.name = "";
         this.description = "";
-        
+        this.is_deleted = 0;
     }
 }
