@@ -2,9 +2,6 @@
 
 const pool = require ("./mysql_provider")
 
-
-
-
 function  getMethods(obj) {
     var result = [];
     for (var id in obj) {
@@ -19,18 +16,24 @@ function  getMethods(obj) {
     }
     return result;
   }
-
   
+  console.log( "before getPoolConnectionTransaction ")
+ pool.getPoolConnectionTransaction().then(
+   async conn=>{
+    console.log( "1")
+     try{ console.log(`connection ${conn}`);
+     let s = await conn.query("select * from buy_lists")
+   console.log( "after query")
+   await conn.commit();
+   console.log( "after commit")
+   }
+   catch(err){
+    console.log( err);
+   }
+   return "finished -=-=-=-=-=-=";
+  }
+  ).then( a=> console.log( a)).catch(err=>console.log(err));
 
-  pool.getConnection((err, connection)=>{
-      console.log(err);
-      await connection.beginTransaction();
-      await connection.query("select * from buy_lists");
-      await connection.commit();
-    getMethods(connection);
-  });
-
-
-  
+  console.log( "after getPoolConnectionTransaction ")
   
 
