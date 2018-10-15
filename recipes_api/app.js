@@ -14,8 +14,9 @@ const instruction = require('./controllers/instruction')
 const media = require('./controllers/media')
 const recipe_steps = require('./controllers/recipe_steps')
 const recipe = require('./controllers/recipe')
+const myLogger = require('./middlewares/middleware');
 
-console.log(__dirname);
+app.use(myLogger)
 app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/authentication', authentication);
 app.use('/api/v1/ingredient',ingredient);
@@ -27,4 +28,6 @@ app.use('/api/v1/recipe-steps',recipe_steps)
 app.use('/api/v1/recipe',recipe)
 app.get('/', (req, res) => res.send('Hello World!'));
 
+
 app.listen(3000);
+console.log("port 3000, server started")
