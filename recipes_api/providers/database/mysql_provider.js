@@ -1,15 +1,17 @@
-const config = require( "../../configuration/config");
+const config = require("../../configuration/config");
 const util = require('util');
 
-if(!config || !config["db"] || !config["db"]["mysql"]){
+
+module.exports = () => {
+  if (!config || !config["db"] || !config["db"]["mysql"]) {
     console.log(config.db);
     console.error("db configuration does not found");
     throw "db configuration does not found"
-}
+  }
 
-const mysql = require('mysql')
-const mysql_config = config["db"]["mysql"]
-const pool = mysql.createPool({
+  const mysql = require('mysql')
+  const mysql_config = config["db"]["mysql"]
+  const pool = mysql.createPool({
     connectionLimit: 30,
     host: mysql_config.connection.host,
     user: mysql_config.connection.user,
@@ -17,121 +19,141 @@ const pool = mysql.createPool({
     database: mysql_config.connection.database,
     supportBigNumbers: true,
     bigNumberStrings: true
-})
+  })
 
 
-pool.getConnection = util.promisify(pool.getConnection);
-/*pool.getConnection((err, connection) => {
-    if (err) {
-        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.error('Database connection was closed.')
-        }
-        if (err.code === 'ER_CON_COUNT_ERROR') {
-            console.error('Database has too many connections.')
-        }
-        if (err.code === 'ECONNREFUSED') {
-            console.error('Database connection was refused.')
-        }
+  pool.getConnection = util.promisify(pool.getConnection);
+
+  pool.query = util.promisify(pool.query);
+
+  execute_query = async (query, params) => {
+    try {
+      console.log(`executing ${query}`);
+      let results = await pool.query(query, params);
+      return Promise.resolve(results);
+    } catch (err) {
+      console.error(err);
+
     }
-    if (connection) connection.release()
-    return
-})*/
+  }
 
+  executePromisedQueryConnection = async (connection, query, params) => {
+    try {
+      console.log(`executing ${query}`);
 
+      let results = await connection.query(query, params);
+      return Promise.resolve(results);
+    } catch (err) {
+      console.error(err);
+      return Promise.reject(err);
+    }
+  }
 
-pool.query = util.promisify(pool.query);
+  let cdLogger = {};
+  cdLogger.error = console.error;
+  cdLogger.info = console.log;
 
-
-
-let cdLogger = {};
-cdLogger.error = console.error;
-cdLogger.info = console.log;
-
-const uuid = require('uuid/v4');
-pool.getPoolConnectionTransaction = async ()=>{ 
+  const uuid = require('uuid/v4');
+  pool.getPoolConnectionTransaction = async () => {
     try {
       cdLogger.error(`getPoolConnectionTransaction :)`);
-      let connection =null;
+      let connection = null;
       connection = await pool.getConnection();
-      cdLogger.info( `connecton created ${connection}`);
+      connection.query = util.promisify(connection.query);
+      //  connection.commit = util.promisify(connection.commit);
+      //  connection.rollback = util.promisify(connection.rollback);
+
+      cdLogger.info(`connecton created ${connection}`);
       await connection.beginTransaction()
-      cdLogger.info( "transaction begin");
-      
-      return Promise.resolve(connection);  
+      cdLogger.info("transaction begin");
+
+      return Promise.resolve(connection);
     }
     catch (error) {
       cdLogger.error(`pool.getPoolConnection error: `, error);
-      return Promise.reject( error);
+      return Promise.reject(error);
     }
- 
-}
+
+  }
 
 
-pool.commitTransaction = async(connection) => {
+  pool.commitTransaction = async (connection) => {
 
-  return Promise((resolve, reject) => {
-    try {
-      console.log(`MySQLProvider.commitTransaction start`);
-      connection.commit((err) => {
-        if (err) {
-          return reject(err)
-        }
-        else {
-          connection.release();
-          return resolve(true);
-        }
-      });
-    }
-    catch (err) {
-      console.error(`MySQLProvider.getPoolConnection error: `, err);
-      return reject(err);
-    }
-  });
-}
-
-
-pool.rollbackTransaction = async(connection)=> {
-
-  return Promise((resolve, reject) => {
-    try {
-      if (connection) {
-        console.log(`MySQLProvider.rollbackTransaction start`);
-        connection.rollback(() => {
-         // cdLogger.error('rollback');
-          connection.release();
-          return resolve(true);
+    return new Promise((resolve, reject) => {
+      try {
+        console.log(`MySQLProvider.commitTransaction start`);
+        connection.commit((err) => {
+          if (err) {
+            return reject(err)
+          }
+          else {
+            connection.release();
+            return resolve(true);
+          }
         });
       }
-      else {
-        return reject("GENERAL_ERROR");
+      catch (err) {
+        if (connection) {
+          connection.release();
+        }
+        console.error(`MySQLProvider.getPoolConnection error: `, err);
+        return reject(err);
       }
-    }
-    catch (err) {
-     console.error(`MySQLProvider.getPoolConnection error: `, err);
-      return reject(err);
-    }
-  });
-}
+    });
+  }
 
-//create update 
-pool.executePromisedQueryFilterOkPacket = async (query, params)=> {
 
-  return Promise((resolve, reject) => {
-    try {
-      if (process.env.NODE_ENV !== 'production') {
-        console.info(`MySQLProvider.executePromisedQueryFilterOkPacket (${query}) start`);
+  pool.rollbackTransaction = async (connection) => {
+
+    return Promise((resolve, reject) => {
+      try {
+        if (connection) {
+          console.log(`MySQLProvider.rollbackTransaction start`);
+          connection.rollback(() => {
+            // cdLogger.error('rollback');
+            connection.release();
+            return resolve(true);
+          });
+        }
+        else {
+          return reject("GENERAL_ERROR");
+        }
       }
-      pool.query(query, params, (err_query, result) => {
-        return resolve(this.handleQueryResponse(err_query, result));
-      });
-    }
-    catch (err) {
-     //cdLogger.error(`MySQLProvider.executePromisedQueryFilterOkPacket (${query}) error: `, err);
-      return reject(err);
-    }
-  });
+      catch (err) {
+        if (connection) {
+          connection.release();
+        }
+        console.error(`MySQLProvider.getPoolConnection error: `, err);
+        return reject(err);
+      }
+    });
+  }
+
+  //create update 
+  pool.executePromisedQueryFilterOkPacket = async (query, params) => {
+
+    return Promise((resolve, reject) => {
+      try {
+        if (process.env.NODE_ENV !== 'production') {
+          console.log(`MySQLProvider.executePromisedQueryFilterOkPacket (${query}) start`);
+        }
+        pool.query(query, params, (err_query, result) => {
+          return resolve(this.handleQueryResponse(err_query, result));
+        });
+      }
+      catch (err) {
+        console.error(`MySQLProvider.executePromisedQueryFilterOkPacket (${query}) error: `, err);
+        return reject(err);
+      }
+    });
+  }
+
+  return {
+    "execute_query": execute_query,
+    "getConnection": pool.getPoolConnectionTransaction,
+    "commitTransaction": pool.commitTransaction,
+    "rollbackTransaction": pool.rollbackTransaction,
+    "executeQueryWithConnection": executePromisedQueryConnection
+  }
+
 }
-
-
-
-module.exports = pool;
