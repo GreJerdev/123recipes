@@ -18,7 +18,8 @@ module.exports = () => {
     password: mysql_config.connection.password,
     database: mysql_config.connection.database,
     supportBigNumbers: true,
-    bigNumberStrings: true
+    bigNumberStrings: true,
+    multipleStatements:true
   })
 
 
@@ -75,7 +76,6 @@ module.exports = () => {
     }
 
   }
-
 
   pool.commitTransaction = async (connection) => {
 

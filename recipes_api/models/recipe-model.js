@@ -6,7 +6,7 @@ module.exports = class Recipe {
     constructor(recipe) {
         if (recipe) {
             this.id = recipe.id || "";
-            this.parent = recipe.parent || "";
+            this.parent = recipe.parent || null;
             this.name = recipe.name || "";
             this.description = recipe.description || "";
         } else {

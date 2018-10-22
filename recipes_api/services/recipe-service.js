@@ -37,6 +37,20 @@ module.exports = class RecipeService {
 
     }
 
+    async get_recipe_by_id(recipe_id){
+        try {
+            console.log("get_recipe_by_id - start")
+            const recipe = await this.recipe_dbprovider.get_recipe_by_id(recipe_id);
+            console.log("get_recipe_by_id - end")
+            return Promise.resolve(recipe);
+        } catch (err) {
+            console.log(`get_recipe_by_id - error, ${err}`);
+            console.log("get_recipe_by_id - end")
+            return Promise.reject(err);
+        }
+    
+    } 
+
 }
 
 
