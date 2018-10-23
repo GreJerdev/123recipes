@@ -15,11 +15,13 @@ const media = require('./controllers/media')
 const recipe_steps = require('./controllers/recipe_steps')
 const recipe = require('./controllers/recipe')
 const myLogger = require('./middlewares/middleware');
+const set_response_methods = require('./middlewares/set-response-methods');
 const bodyParser = require('body-parser');
 
 
 
 app.use(myLogger);
+app.use(set_response_methods);
 app.use(bodyParser.json())
 app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/authentication', authentication);

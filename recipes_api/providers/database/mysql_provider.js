@@ -129,25 +129,6 @@ module.exports = () => {
     });
   }
 
-  //create update 
-  pool.executePromisedQueryFilterOkPacket = async (query, params) => {
-
-    return Promise((resolve, reject) => {
-      try {
-        if (process.env.NODE_ENV !== 'production') {
-          console.log(`MySQLProvider.executePromisedQueryFilterOkPacket (${query}) start`);
-        }
-        pool.query(query, params, (err_query, result) => {
-          return resolve(this.handleQueryResponse(err_query, result));
-        });
-      }
-      catch (err) {
-        console.error(`MySQLProvider.executePromisedQueryFilterOkPacket (${query}) error: `, err);
-        return reject(err);
-      }
-    });
-  }
-
   return {
     "execute_query": execute_query,
     "getConnection": pool.getPoolConnectionTransaction,

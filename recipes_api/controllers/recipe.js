@@ -24,9 +24,9 @@ router.get('/:recipe_id', async (req, res) => {
     let recipe_id = req.params['recipe_id'];
     console.log(recipe_id)
     let recipe = await recipe_service.get_recipe_by_id(recipe_id);
-    res.send(recipe);
+    res.done(recipe);
   }catch(err){
-    res.send(err);
+    res.error(err);
   }
 })
 
