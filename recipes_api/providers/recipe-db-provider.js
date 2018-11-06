@@ -66,10 +66,13 @@ VALUES
         }
     }
 
-    async get_recipe_by_id(recipe_id){
+    async get_recipe_by_id(recipe_id) {
         try {
-            let result = await mysql_provider.execute_query(this.select_by_id_query,[recipe_id]);
-            return Promise.resolve(result);
+            let result = await mysql_provider.execute_query(this.select_by_id_query, [recipe_id]);
+            if (result.length > 0) {
+                return Promise.resolve(result[0]);
+            }
+            return Promise.reject("Error_Recipe_Not_exist")
         } catch (err) {
             console.log(err)
             return Promise.reject(err);

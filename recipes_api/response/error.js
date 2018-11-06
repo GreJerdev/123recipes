@@ -1,4 +1,6 @@
-module.exports = createError = (request, response) => {
+"use strict";
+
+module.exports = (request, response) => {
 
     return (error,error_code) => {
         response.status(error_code);

@@ -1,4 +1,6 @@
-module.exports = createDone = (request, response) => {
+"use strict";
+
+module.exports = (request, response) => {
 
     return (data) => {
         response.status(200);

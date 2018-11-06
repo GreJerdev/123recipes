@@ -16,4 +16,15 @@ module.exports = class Recipe {
             this.description = "";
         }
     }
+
+    parseFromDB(row){
+         let recipe = new Recipe();
+         if(row){
+            recipe.id = row['recipe_id'];
+            recipe.parent = row['recipe_parent'] || null;
+            recipe.name = row['recipe_name'] || '';
+            recipe.description = row['recipe_description'] || '';
+         }
+         return recipe;
+    }
 }

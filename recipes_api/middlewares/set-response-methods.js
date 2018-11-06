@@ -1,3 +1,5 @@
+"use strict";
+
 const createDone = require('../response/done');
 const createError = require('../response/error');
 

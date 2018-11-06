@@ -1,3 +1,5 @@
+"use strict";
+
 const config = require("../../configuration/config");
 const util = require('util');
 
@@ -27,18 +29,18 @@ module.exports = () => {
 
   pool.query = util.promisify(pool.query);
 
-  execute_query = async (query, params) => {
+  const execute_query = async (query, params) => {
     try {
       console.log(`executing ${query}`);
       let results = await pool.query(query, params);
-      return Promise.resolve(results);
+      return Promise.resolve(results[1]);
     } catch (err) {
       console.error(err);
 
     }
   }
 
-  executePromisedQueryConnection = async (connection, query, params) => {
+  const executePromisedQueryConnection = async (connection, query, params) => {
     try {
       console.log(`executing ${query}`);
 
@@ -129,12 +131,17 @@ module.exports = () => {
     });
   }
 
+  const getOnlyData = (mySQLresponse)  => {
+
+  } 
+
   return {
     "execute_query": execute_query,
     "getConnection": pool.getPoolConnectionTransaction,
     "commitTransaction": pool.commitTransaction,
     "rollbackTransaction": pool.rollbackTransaction,
-    "executeQueryWithConnection": executePromisedQueryConnection
+    "executeQueryWithConnection": executePromisedQueryConnection,
+    "getOnlyData":getOnlyData
   }
 
 }
