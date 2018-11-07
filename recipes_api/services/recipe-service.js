@@ -25,11 +25,11 @@ module.exports = class RecipeService {
         }
     }
 
-    async update_recipe() {
+    async update_recipe(recipe) {
 
     }
 
-    async delete_recipe() {
+    async delete_recipe(recipe_id) {
 
     }
 
