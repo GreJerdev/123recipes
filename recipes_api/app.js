@@ -6,6 +6,7 @@ const path = require("path")
 const express = require('express')
 const app = express();
 const authentication = require('./controllers/authentication')
+require("./utilities/logger");
 
 const ingredient = require('./controllers/ingredient');
 const shop_list = require('./controllers/shop_list')
@@ -33,6 +34,17 @@ app.use('/api/v1/media',media)
 app.use('/api/v1/recipe-steps',recipe_steps)
 app.use('/api/v1/recipe',recipe)
 app.get('/', (req, res) => res.send('Hello World!'));
+
+
+
+logger.error("error",{"message":"it's an error !!!"});
+logger.warn("warn");
+logger.info("info");
+logger.info("info");
+logger.info("info");
+logger.verbose("verbose");
+logger.debug("debug");
+logger.silly("silly");
 
 
 app.listen(3000);
