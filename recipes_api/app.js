@@ -36,7 +36,7 @@ app.use('/api/v1/recipe',recipe)
 app.get('/', (req, res) => res.send('Hello World!'));
 
 
-
+/*
 logger.error("error",{"message":"it's an error !!!"});
 logger.warn("warn");
 logger.info("info");
@@ -45,7 +45,7 @@ logger.info("info");
 logger.verbose("verbose");
 logger.debug("debug");
 logger.silly("silly");
-
+*/
 
 app.listen(3000);
 console.log("port 3000, server started")

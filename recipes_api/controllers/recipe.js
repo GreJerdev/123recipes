@@ -11,9 +11,9 @@ router.post('/', async (req, res) => {
     let recipe = req.body;
     console.log(recipe)
     recipe = await recipe_service.create_recipe(recipe);
-    res.send(recipe);
+    res.done(recipe);
   }catch(err){
-    res.send(err);
+    res.error(err);
   }
 });
 

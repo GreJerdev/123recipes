@@ -10,12 +10,16 @@ module.exports = class RecipeService {
         this.recipe_dbprovider = new recipe_db_provider()
     }
 
+    prefix(){return 'recipe_';} 
+
     async create_recipe(recipe) {
         try {
+            console.log("create_recipe - start")
             let new_recipe = new recipe_model(recipe)
             new_recipe.id = uuid();
-            console.log("create_recipe - start")
-            recipe = await this.recipe_dbprovider.create_recipe(new_recipe);
+          
+            await this.recipe_dbprovider.create_recipe(new_recipe);
+            recipe = await this.get_recipe_by_id(new_recipe.id)
             console.log("create_recipe - end")
             return Promise.resolve(recipe);
         } catch (err) {
@@ -33,8 +37,17 @@ module.exports = class RecipeService {
 
     }
 
-    async get_list_recipe(search_by, order_by, page_number, page_size, limit) {
-
+    async get_list_recipe(search_by, order_by, page_number, page_size) {
+        try {
+            console.log("get_list_recipe - start")
+            const recipe = await this.recipe_dbprovider.get_list_recipe(search_by, order_by, page_number, page_size);
+            console.log("get_list_recipe - end")
+            return Promise.resolve(recipe);
+        } catch (err) {
+            console.log(`get_list_recipe - error, ${err}`);
+          
+            return Promise.reject(err);
+        } 
     }
 
     async get_recipe_by_id(recipe_id){
@@ -45,7 +58,6 @@ module.exports = class RecipeService {
             return Promise.resolve(recipe);
         } catch (err) {
             console.log(`get_recipe_by_id - error, ${err}`);
-            console.log("get_recipe_by_id - end")
             return Promise.reject(err);
         }
     
