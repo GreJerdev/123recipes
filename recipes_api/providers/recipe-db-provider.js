@@ -59,7 +59,7 @@ VALUES
             SET @recipe_name = ?;
             SET @recipe_parent = ?;
             SET @recipe_description = ?;
-            SET @recipe_stars = ?
+            SET @recipe_stars = ?;
             
             UPDATE recipes
             SET recipe_id = @recipe_id
@@ -71,8 +71,8 @@ VALUES
             ;`
 
             const params = [update_recipe.id, update_recipe.name, update_recipe.parent || null, update_recipe.description,update_recipe.stars];
-            await mysql_provider.executeQueryWithConnection(conn, this.insert_query, params);
-            let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
+            await mysql_provider.executeQueryWithConnection(conn, query, params);
+            let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [update_recipe.id]);
             mysql_provider.commitTransaction(conn);
             return Promise.resolve(result);
         } catch (err) {
