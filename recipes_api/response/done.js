@@ -6,6 +6,7 @@ module.exports = (request, response) => {
         response.status(200);
         return response.send({
             "status": {
+                "operiration_id":request.requiest_guid,
                 "status_code": "SUCCESS",
                 "error_code": "0",
                 "error_massage": ""
