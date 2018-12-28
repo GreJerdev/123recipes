@@ -1,5 +1,7 @@
 "use strict";
 
+let mysql_provider = require('./database/mysql_provider')();
+
 module.exports = class buy_list_to_item{
 
     constructor(){

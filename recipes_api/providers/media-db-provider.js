@@ -1,4 +1,5 @@
 "use strict";
+let mysql_provider = require('./database/mysql_provider')();
 
 module.exports = class media{
 
