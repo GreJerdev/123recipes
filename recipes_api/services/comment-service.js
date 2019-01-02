@@ -1,24 +1,25 @@
 "use strict";
 
-module.exports = class comment{
+module.exports = class CommentService{
 
     constructor(){
 
     }
+    prefix(){return 'comment';} 
 
-    create_comment(){
-
-    }
-
-    update_comment(){
+    createComment(){
 
     }
 
-    delete_comment(){
+    updateComment(){
 
     }
 
-    get_list_comment(search_by, order_by, page_number, page_size, limit){
+    deleteComment(){
+
+    }
+
+    getListComment(search_by, order_by, page_number, page_size, limit){
 
     }
 

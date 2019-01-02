@@ -2,13 +2,13 @@
 
 let mysql_provider = require('./database/mysql_provider')();
 
-module.exports = class buy_list {
+module.exports = class buyListProvider {
 
     constructor() {
 
     }
 
-    create_buy_list(id, name, description, parent, conn) {
+    createBuyList(id, name, description, parent, conn) {
         let log_path = 'ingredient_list/create_buy_list -';
         let is_external_connection = false;
         try {
@@ -54,7 +54,7 @@ VALUES
         }
     }
 
-    update_buy_list(id, name, description, parent, conn) {
+    updateBuyList(id, name, description, parent, conn) {
         let log_path = 'ingredient_list/update_buy_list -'
         let is_external_connection = false;
         try {
@@ -87,7 +87,7 @@ WHERE buy_list_id = @id
         }
     }
 
-    delete_buy_list() {
+    deleteBuyList() {
         let log_path = 'ingredient_list/delete_buy_list -'
         let is_external_connection = false;
         try {
@@ -133,7 +133,7 @@ WHERE buy_list_id = @id
         }
     }
 
-    get_list_buy_list(search_by, order_by, page_number, page_size, limit) {
+    getListBuyList(search_by, order_by, page_number, page_size, limit) {
         let log_path = 'ingredient_list/get_list_buy_list -'
         try {
             if (!conn) {

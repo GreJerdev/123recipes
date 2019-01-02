@@ -1,25 +1,27 @@
 "use strict";
 
-module.exports = class ingredient {
+module.exports = class IngredientService {
 
     constructor(instanceFectory) {
         this.instanceFectory = instanceFectory
         this.igredient_db_provider = this.instanceFectory.get('igredient_db_provider');
     }
 
-    create_ingredient() {
+    prefix(){return 'ingredient_';} 
+
+    createIngredient() {
 
     }
 
-    update_ingredient() {
+    updateIngredient() {
 
     }
 
-    delete_ingredient() {
+    deleteIngredient() {
 
     }
 
-    get_list_ingredient(search_by, order_by, page_number, page_size, limit) {
+    getListIngredient(search_by, order_by, page_number, page_size, limit) {
 
     }
 

@@ -1,7 +1,7 @@
 "use strict";
 
 
-module.exports = class buy_list_to_item{
+module.exports = class BuyListToItem{
 
     constructor(){
         this.buy_list_id = 0;

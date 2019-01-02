@@ -2,25 +2,25 @@
 
 let mysql_provider = require('./database/mysql_provider')();
 
-module.exports = class instruction{
+module.exports = class InstructionProvider{
 
     constructor(){
 
     }
 
-    create_instruction(){
+    createInstruction(){
 
     }
 
-    update_instruction(){
+    updateInstruction(){
 
     }
 
-    delete_instruction(){
+    deleteInstruction(){
 
     }
 
-    get_list_instruction(search_by, order_by, page_number, page_size, limit){
+    getListInstruction(search_by, order_by, page_number, page_size, limit){
 
     }
 

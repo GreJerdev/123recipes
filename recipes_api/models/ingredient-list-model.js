@@ -1,7 +1,7 @@
 "use strict";
 
 
-module.exports = class ingredient_list{
+module.exports = class IngredientList{
 
     constructor(){
         this.id = 0;

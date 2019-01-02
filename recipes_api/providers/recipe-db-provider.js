@@ -3,7 +3,7 @@
 let mysql_provider = require("./database/mysql_provider")();
 let models = require("../models/recipe-model");
 
-module.exports = class recipe {
+module.exports = class RecipeProvider {
   constructor() {
     this.insert_query = `SET @recipe_id = fn_uuid_to_bin(?) ;
 SET @recipe_name = ? ;
@@ -32,7 +32,7 @@ VALUES
         where recipe_id = @recipe_id  and recipe_is_deleted = 0`;
   }
 
-  async create_recipe(new_recipe, conn = null) {
+  async createRecipe(new_recipe, conn = null) {
     let is_external_connection = true;
     if (conn == null) {
       conn = await mysql_provider.getConnection();
@@ -68,7 +68,7 @@ VALUES
     }
   }
 
-  async update_recipe(update_recipe, conn = null) {
+  async updateRecipe(update_recipe, conn = null) {
     let is_external_connection = true;
     if (conn == null) {
       conn = await mysql_provider.getConnection();
@@ -112,7 +112,7 @@ VALUES
     }
   }
 
-  async delete_recipe(recipe_id, conn = null) {
+  async deleteRecipe(recipe_id, conn = null) {
     let is_external_connection = true;
     if (conn == null) {
       conn = await mysql_provider.getConnection();
@@ -150,7 +150,7 @@ VALUES
     }
   }
 
-  async get_list_recipe(search_by, order_by, page_number, page_size) {
+  async getListRecipe(search_by, order_by, page_number, page_size) {
     try {
       const conn = await mysql_provider.getConnection();
       const first_row = page_number || 0;
@@ -193,7 +193,7 @@ VALUES
     }
   }
 
-  async get_recipe_by_id(recipe_id, conn) {
+  async getRecipeById(recipe_id, conn) {
     let is_external_connection = true;
     try {
       let result = await mysql_provider.execute_query(this.select_by_id_query, [

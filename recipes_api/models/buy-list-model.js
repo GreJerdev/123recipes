@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = class buy_list {
+module.exports = class BuyList {
   constructor() {
     this.id = 0;
     this.name = "";

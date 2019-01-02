@@ -1,7 +1,7 @@
 "use strict";
 
 
-module.exports = class instruction{
+module.exports = class Instruction{
 
     constructor(){
         this.id = 0;

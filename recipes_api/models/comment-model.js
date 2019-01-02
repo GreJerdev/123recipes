@@ -1,7 +1,7 @@
 "use strict";
 
 
-module.exports = class comment{
+module.exports = class Comment{
 
     constructor(){
         this.id = 0;

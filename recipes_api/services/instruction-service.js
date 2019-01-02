@@ -1,24 +1,26 @@
 "use strict";
 
-module.exports = class instruction{
+module.exports = class InstructionService{
 
     constructor(){
 
     }
 
-    create_instruction(){
+    prefix(){return 'instruction_';} 
+
+    createInstruction(){
 
     }
 
-    update_instruction(){
+    updateInstruction(){
 
     }
 
-    delete_instruction(){
+    deleteInstruction(){
 
     }
 
-    get_list_instruction(search_by, order_by, page_number, page_size, limit){
+    getListInstruction(search_by, order_by, page_number, page_size, limit){
 
     }
 

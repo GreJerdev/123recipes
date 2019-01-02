@@ -1,7 +1,7 @@
 "use strict";
 
 
-module.exports = class media{
+module.exports = class Media{
 
     constructor(){
         this.id = "";

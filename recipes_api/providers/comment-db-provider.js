@@ -2,7 +2,7 @@
 
 let mysql_provider = require('./database/mysql_provider')();
 
-module.exports = class comment{
+module.exports = class CommentProvider{
 
     constructor(){
 

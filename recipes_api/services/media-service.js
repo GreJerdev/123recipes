@@ -1,24 +1,26 @@
 "use strict";
 
-module.exports = class media{
+module.exports = class MediaService{
 
     constructor(){
 
     }
 
-    create_media(){
+    prefix(){return 'media_';} 
+
+    createMedia(){
 
     }
 
-    update_media(){
+    updateMedia(){
 
     }
 
-    delete_media(){
+    deleteMedia(){
 
     }
 
-    get_list_media(search_by, order_by, page_number, page_size, limit){
+    getListMedia(search_by, order_by, page_number, page_size, limit){
 
     }
 
