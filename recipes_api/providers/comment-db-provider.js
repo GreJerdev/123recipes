@@ -8,19 +8,19 @@ module.exports = class CommentProvider{
 
     }
 
-    create_comment(){
+    createComment(){
 
     }
 
-    update_comment(){
+    updateComment(){
 
     }
 
-    delete_comment(){
+    deleteComment(){
 
     }
 
-    get_list_comment(search_by, order_by, page_number, page_size, limit){
+    getListComment(search_by, order_by, page_number, page_size, limit){
 
     }
 

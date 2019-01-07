@@ -133,7 +133,7 @@ WHERE buy_list_id = @id
         }
     }
 
-    getListBuyList(search_by, order_by, page_number, page_size, limit) {
+    getListOfBuyList(search_by, order_by, page_number, page_size, limit) {
         let log_path = 'ingredient_list/get_list_buy_list -'
         try {
             if (!conn) {

@@ -2,10 +2,10 @@
 
 let mysql_provider = require("./database/mysql_provider")();
 
-module.exports = class buyListToItemProvider {
+module.exports = class buyListItemsProvider {
   constructor() { }
 
-  async createBuyListToItem(item_id, list_id, type, quantity, unit, conn = null) {
+  async addItemToList(item_id, list_id, type, quantity, unit, conn = null) {
     let log_path = "buy_list_to_item_db_provider/createBuyListToItem -";
     let is_external_connection = true;
     if (conn == null) {
@@ -52,7 +52,7 @@ module.exports = class buyListToItemProvider {
     }
   }
 
-  async updateBuyListToItem(item_id, list_id, type, quantity, unit, bought, conn = null) {
+  async updateBuyItemInList(item_id, list_id, type, quantity, unit, bought, conn = null) {
     let log_path = "buy_list_to_item_db_provider/updateBuyListToItem -";
     let is_external_connection = true;
     if (conn == null) {
@@ -92,7 +92,7 @@ module.exports = class buyListToItemProvider {
     }
   }
 
-  async deleteBuyListToItem(item_id, list_id, conn = null) {
+  async removeItemFromList(item_id, list_id, conn = null) {
     let log_path = "buy_list_to_item_db_provider/deleteBuyListToItem -";
     let is_external_connection = true;
     if (conn == null) {
@@ -127,7 +127,7 @@ module.exports = class buyListToItemProvider {
     }
   }
 
-  async getItemsByListId(list_id, conn = null) {
+  async getListItems(list_id, conn = null) {
     let log_path = "buy_list_to_item_db_provider/getItemsByListId -";
     try {
       let params = [list_id];

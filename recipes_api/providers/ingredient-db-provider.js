@@ -15,7 +15,7 @@ module.exports = class IngredientProvider {
                 conn = await mysql_provider.getConnection();
                 is_conn_external = false;
             }
-            query = ` SET @id = fn_uuid_from_bin(?);
+            let query = ` SET @id = fn_uuid_from_bin(?);
             SET @name = ?;
             SET @measuring_unit = ?;
             SET @measuring_size = ?;
@@ -66,6 +66,10 @@ module.exports = class IngredientProvider {
                 is_conn_external = false;
             }
             const params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
+            let query = `
+            
+            `;
+            
             await mysql_provider.executeQueryWithConnection(conn, , params);
             let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
             if (!is_conn_external) {
@@ -89,6 +93,10 @@ module.exports = class IngredientProvider {
                 conn = await mysql_provider.getConnection();
                 is_conn_external = false;
             }
+            const params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
+            let query = `
+            
+            `;
             const params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
             await mysql_provider.executeQueryWithConnection(conn,  , params);
             let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
