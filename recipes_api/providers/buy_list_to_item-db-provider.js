@@ -151,3 +151,4 @@ FROM buy_list_to_items_buy_list_id = @list_id;`;
     }
   }
 };
+
