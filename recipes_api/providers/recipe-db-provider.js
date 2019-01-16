@@ -183,9 +183,7 @@ VALUES
       );
       mysql_provider.commitTransaction(conn);
       return Promise.resolve(result);
-      let result = await mysql_provider.execute_query(
-        "select fn_uuid_from_bin(recipe_id) as recipe_id,fn_uuid_from_bin(recipe_parent) as recipe_parent,recipe_name,recipe_description from recipes;"
-      );
+      let result = await getRecipeById(recipe_id, conn);
       return Promise.resolve(result);
     } catch (err) {
       logger.log(err);
