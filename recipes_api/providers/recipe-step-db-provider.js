@@ -8,7 +8,7 @@ module.exports = class recipeStepProvider {
 
     }
 
-    createRecipeStep(id ,name ,number ,links ,recipe_id, conn = null) {
+    async createRecipeStep(id ,name ,number ,links ,recipe_id, conn = null) {
         let log_path = 'recipe_steps_db_provider/create_recipe_steps -'
         try {
             if (!conn) {
@@ -45,7 +45,7 @@ module.exports = class recipeStepProvider {
         }
     }
 
-    updateRecipeStep(id ,name ,number ,links ,recipe_id, conn = null) {
+    async updateRecipeStep(id ,name ,number ,links ,recipe_id, conn = null) {
         let log_path = 'recipe_steps_db_provider/update_recipe_steps -'
         try {
             if (!conn) {
@@ -77,7 +77,7 @@ module.exports = class recipeStepProvider {
         }
     }
 
-    deleteRecipeStep(conn = null) {
+    async deleteRecipeStep(conn = null) {
         let log_path = 'recipe_steps_db_provider/delete_recipe_steps -'
         try {
             if (!conn) {
@@ -103,7 +103,7 @@ module.exports = class recipeStepProvider {
         }
     }
 
-    getRecipeStepById(id, conn = null) {
+    async getRecipeStepById(id, conn = null) {
         let log_path = 'recipe_steps_db_provider/get_list_recipe_steps -'
         try {
             if (!conn) {
@@ -131,7 +131,7 @@ module.exports = class recipeStepProvider {
         }
     }
 
-    getRecipeStepsByRecipeId(recipe_id, conn = null) {
+    async getRecipeStepsByRecipeId(recipe_id, conn = null) {
         let log_path = 'recipe_steps_db_provider/get_list_recipe_steps -'
         try {
             if (!conn) {

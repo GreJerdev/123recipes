@@ -19,23 +19,23 @@ module.exports = class buyListProvider {
             }
 
             let query = `
-SET @id = fn_uuid_to_bin(?);
-SET @name = ?;
-SET @description = ?;
-SET @parent  = fn_uuid_to_bin(?) ;
-
-
-INSERT INTO buy_lists
-(
-buy_list_id,
-buy_list_name,
-buy_list_description,
-buy_lists_parent)
-VALUES
-(@id,
-@name,
-@description,
-@parent);
+                SET @id = fn_uuid_to_bin(?);
+                SET @name = ?;
+                SET @description = ?;
+                SET @parent  = fn_uuid_to_bin(?) ;
+                
+                
+                INSERT INTO buy_lists
+                (
+                buy_list_id,
+                buy_list_name,
+                buy_list_description,
+                buy_lists_parent)
+                VALUES
+                (@id,
+                @name,
+                @description,
+                @parent);
             `;
 
             const params = [];

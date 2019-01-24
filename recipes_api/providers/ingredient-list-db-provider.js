@@ -8,8 +8,8 @@ module.exports = class IngredientListProvider{
 
     }
 
-    createIngredientList(ingredient_list ,connection){
-        let log_path = 'ingredient_list/create_ingredient_list -'
+    async createIngredientList(ingredient_list ,conn = null){
+        let log_path = 'IngredientListProvider/createIngredientList - start';
         try {
             if (!conn) {
                 conn = await mysql_provider.getConnection();
@@ -25,8 +25,8 @@ module.exports = class IngredientListProvider{
         }
     }
 
-    updateIngredientList(ingredient_list ,connection){
-        let log_path = 'ingredient_list/update_ingredient_list -'
+    async updateIngredientList(ingredient_list ,conn = null){
+        let log_path = 'IngredientListProvider/updateIngredientList - start';
         try {
             if (!conn) {
                 conn = await mysql_provider.getConnection();
@@ -42,8 +42,8 @@ module.exports = class IngredientListProvider{
         }
     }
 
-    deleteIngredientList(ingredient_list_id ,connection){
-        let log_path = 'ingredient_list/delete_ingredient_list -'
+    async deleteIngredientList(ingredient_list_id ,conn = null){
+        let log_path = 'IngredientListProvider/deleteIngredientList - start';
         try {
             if (!conn) {
                 conn = await mysql_provider.getConnection();
@@ -59,8 +59,8 @@ module.exports = class IngredientListProvider{
         }
     }
 
-    getListIngredientList(search_by, order_by, page_number, page_size, limit){
-        let log_path = 'ingredient_list/get_list_ingredient_list -'
+    async getListIngredientList(search_by, order_by, page_number, page_size, limit, conn = null){
+        let log_path = 'IngredientListProvider/getListIngredientList - start';
         try {
             if (!conn) {
                 conn = await mysql_provider.getConnection();
@@ -68,7 +68,6 @@ module.exports = class IngredientListProvider{
             const params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
             await mysql_provider.executeQueryWithConnection(conn, this.insert_query, params);
             let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
-            mysql_provider.commitTransaction(conn);
             return Promise.resolve(result);
         }
         catch (err) {
@@ -76,8 +75,8 @@ module.exports = class IngredientListProvider{
         }
     }
 
-    getIngredientList(ingredient_list_id,connection){
-        let log_path = 'ingredient_list/get_ingredient_list -'
+    async getIngredientList(ingredient_list_id,conn = null){
+        let log_path = 'IngredientListProvider/getIngredientList - start';
         try {
             if (!conn) {
                 conn = await mysql_provider.getConnection();
@@ -85,7 +84,6 @@ module.exports = class IngredientListProvider{
             const params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
             await mysql_provider.executeQueryWithConnection(conn, this.insert_query, params);
             let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
-            mysql_provider.commitTransaction(conn);
             return Promise.resolve(result);
         }
         catch (err) {
@@ -93,6 +91,6 @@ module.exports = class IngredientListProvider{
         }
     }
 
-}
+};
 
 
