@@ -4,7 +4,13 @@
   "description": "training app for mange a list of recipes, it contains front end (as SPA) and back end",
   "main": "app.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "test"
+=======
+    "start": "node app.js",
+    "test": "test",
+    "serve": "node ./node_modules/nodemon\\bin\\nodemon app.js"
+>>>>>>> 61930d7fbf194f67113ac5c19802b913e59e7ee9
   },
   "repository": {
     "type": "git",
@@ -21,8 +27,22 @@
   },
   "homepage": "https://github.com/GreJerdev/123recipes#readme",
   "dependencies": {
+<<<<<<< HEAD
     "express": "^4.16.3",
     "mongodb": "^3.1.0",
     "passport-jwt": "^4.0.0"
+=======
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "moment": "^2.22.2",
+    "mongodb": "^3.1.0",
+    "mysql": "^2.16.0",
+    "passport-jwt": "^4.0.0",
+    "uuid": "^3.3.2",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+>>>>>>> 61930d7fbf194f67113ac5c19802b913e59e7ee9
   }
 }

@@ -1,0 +1,13 @@
+{
+    "db": {
+        "mysql": {
+            "type": "mysql",
+            "connection": {
+                "host": "localhost",
+                "user": "root",
+                "database": "123-recipe",
+                "password": "1qaz2wsx"
+            }
+        }
+    }
+}
