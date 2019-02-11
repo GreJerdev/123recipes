@@ -21,7 +21,7 @@ module.exports = () => {
     database: mysql_config.connection.database,
     supportBigNumbers: true,
     bigNumberStrings: true,
-    multipleStatements:true
+    multipleStatements: true
   })
 
 
@@ -41,13 +41,23 @@ module.exports = () => {
   }
 
   const executePromisedQueryConnection = async (connection, query, params) => {
+    let is_external_connection = false;
     try {
-      console.log(`executing ${query}`);
-
+      logger.info(`executing ${query}`);
+      if (!connection) {
+        connection = await pool.getPoolConnectionTransaction();
+        is_external_connection = true;
+      }
       let results = await connection.query(query, params);
+      if (is_external_connection) {
+        await pool.commitTransaction(connection);
+      }
       return Promise.resolve(results);
     } catch (err) {
-      console.error(err);
+      logger.err(err);
+      if (is_external_connection) {
+        await pool.rollbackTransaction(connection);
+      }
       return Promise.reject(err);
     }
   }
@@ -131,9 +141,9 @@ module.exports = () => {
     });
   }
 
-  const getOnlyData = (mySQLresponse)  => {
+  const getOnlyData = (mySQLresponse) => {
 
-  } 
+  }
 
   return {
     "execute_query": execute_query,
@@ -141,7 +151,7 @@ module.exports = () => {
     "commitTransaction": pool.commitTransaction,
     "rollbackTransaction": pool.rollbackTransaction,
     "executeQueryWithConnection": executePromisedQueryConnection,
-    "getOnlyData":getOnlyData
+    "getOnlyData": getOnlyData
   }
 
 }

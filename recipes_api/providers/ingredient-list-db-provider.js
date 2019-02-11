@@ -7,7 +7,16 @@ module.exports = class IngredientListProvider{
     constructor(){
 
     }
+/*
+CREATE TABLE `ingredient_lists` (
+  `ingredient_list_id` binary(16) NOT NULL,
+  `ingredient_list_name` varchar(45) DEFAULT NULL,
+  `ingredient_list_description` text,
+  `ingredient_list_is_deleted` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`ingredient_list_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+*/
     createIngredientList(ingredient_list ,connection){
         let log_path = 'ingredient_list/create_ingredient_list -'
         try {

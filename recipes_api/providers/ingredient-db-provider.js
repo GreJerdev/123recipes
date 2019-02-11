@@ -7,6 +7,19 @@ module.exports = class IngredientProvider {
     constructor() {
 
     }
+/*
+CREATE TABLE `ingredients` (
+  `ingredient_id` binary(16) NOT NULL,
+  `ingredient_name` varchar(45) DEFAULT NULL,
+  `ingredient_measuring_unit` varchar(45) DEFAULT NULL,
+  `ingredient_measuring_size` double DEFAULT NULL,
+  `ingredient_is_deleted` tinyint(1) DEFAULT '0',
+  `ingredient_price` double DEFAULT NULL,
+  `ingredient_price_currency_iso3` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`ingredient_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+*/
+
     createIngredient(id, name, measuring_unit, measuring_size, price, price_currency_iso3, conn = null) {
         let log_path = 'IngredientProvider/createIngredient -'
         let is_conn_external = true;
@@ -70,7 +83,7 @@ module.exports = class IngredientProvider {
             
             `;
             
-            await mysql_provider.executeQueryWithConnection(conn, , params);
+            await mysql_provider.executeQueryWithConnection(conn,query , params);
             let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
             if (!is_conn_external) {
                 mysql_provider.commitTransaction(conn);
@@ -98,7 +111,7 @@ module.exports = class IngredientProvider {
             
             `;
             const params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
-            await mysql_provider.executeQueryWithConnection(conn,  , params);
+            await mysql_provider.executeQueryWithConnection(conn,query , params);
             let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
             if (!is_conn_external) {
                 mysql_provider.commitTransaction(conn);
