@@ -3,7 +3,7 @@
 require('../utilities/logger');
 
 const uuid = require('uuid/v4');
-let buy_list_db_provider = require("./buy_list-db-provider");
+let buy_list_db_provider = require("./buy_list-provider");
 
 
 //create test
