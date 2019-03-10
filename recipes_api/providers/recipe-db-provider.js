@@ -4,34 +4,33 @@ let mysql_provider = require("./database/mysql_provider")();
 let models = require("../models/recipe-model");
 
 module.exports = class RecipeProvider {
-    constructor() {
-        this.insert_query = `SET @recipe_id = fn_uuid_to_bin(?) ;
-            SET @recipe_name = ? ;
-            SET @recipe_parent = ? ;
-            SET @recipe_description = ? ;
-            
-            INSERT INTO recipes
-            (recipe_id,
-            recipe_parent,
-            recipe_name,
-            recipe_description)
-            VALUES
-            ( 
-            @recipe_id,
-            @recipe_parent,
-            @recipe_name,
-            @recipe_description
-            );`;
+  constructor() {
+    this.insert_query = `SET @recipe_id = fn_uuid_to_bin(?) ;
+SET @recipe_name = ? ;
+SET @recipe_parent = ? ;
+SET @recipe_description = ? ;
 
-        this.select_by_id_query = `SET @recipe_id = fn_uuid_to_bin(?);
-            select fn_uuid_from_bin(recipe_id) as recipe_id,
-            fn_uuid_from_bin(recipe_parent) as recipe_parent,
-            recipe_name,
-            recipe_description,
-            recipe_stars 
-            from recipes 
-            where recipe_id = @recipe_id  and recipe_is_deleted = 0`;
-    }
+INSERT INTO recipes
+(recipe_id,
+recipe_parent,
+recipe_name,
+recipe_description)
+VALUES
+( 
+@recipe_id,
+@recipe_parent,
+@recipe_name,
+@recipe_description
+);`;
+    this.select_by_id_query = `SET @recipe_id = fn_uuid_to_bin(?);
+        select fn_uuid_from_bin(recipe_id) as recipe_id,
+        fn_uuid_from_bin(recipe_parent) as recipe_parent,
+        recipe_name,
+        recipe_description,
+        recipe_stars 
+        from recipes 
+        where recipe_id = @recipe_id  and recipe_is_deleted = 0`;
+  }
 
     async createRecipe(new_recipe, conn = null) {
         let is_external_connection = true;
@@ -176,33 +175,31 @@ module.exports = class RecipeProvider {
             limit @first_row, @last_row  
             `;
 
-            await mysql_provider.executeQueryWithConnection(conn, this.insert_query, params);
-            let result = await mysql_provider.executeQueryWithConnection(
-                conn,
-                this.select_by_id_query,
-                [new_recipe.id]
-            );
-            mysql_provider.commitTransaction(conn);
-            return Promise.resolve(result);
-        } catch (err) {
-            logger.log(err);
-            return Promise.reject(err);
-        }
-    }
+      let result = await mysql_provider.executeQueryWithConnection(
+        query,
+        this.select_by_id_query,
+        [new_recipe.id]
+      );
 
-    async getRecipeById(recipe_id, conn) {
-        let is_external_connection = true;
-        try {
-            let result = await mysql_provider.execute_query(this.select_by_id_query, [
-                recipe_id
-            ]);
-            if (result.length > 0) {
-                return Promise.resolve(result[0]);
-            }
-            return Promise.reject("Error_Recipe_Not_exist");
-        } catch (err) {
-            logger.log(err);
-            return Promise.reject(err);
-        }
+      return Promise.resolve(result);
+    } catch (err) {
+      logger.log(err);
+      return Promise.reject(err);
     }
+  }
+
+  async getRecipeById(recipe_id, conn = null) {
+    try {
+      let result = await mysql_provider.executePromisedQueryConnection(conn, this.select_by_id_query, [
+        recipe_id
+      ]);
+      if (result.length > 0) {
+        return Promise.resolve(result[0]);
+      }
+      return Promise.reject("Error_Recipe_Not_exist");
+    } catch (err) {
+      logger.log(err);
+      return Promise.reject(err);
+    }
+  }
 };

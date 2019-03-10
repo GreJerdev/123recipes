@@ -6,5 +6,6 @@ module.exports = class BuyList {
     this.name = "";
     this.description = "";
     this.parent = 0;
+    this.create_at = 0;
   }
 };
