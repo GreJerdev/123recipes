@@ -4,6 +4,8 @@ let configuration = require('../../configuration/config');
 var mongoose = require('mongoose');
 mongoose.connect(configuration.db.mongodb.connection_string);
 
+
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -41,11 +43,51 @@ db.once('open', function() {
         Kitten.find(function (err, kittens) {
             if (err) return console.error(err);
             console.log(kittens);
-        })
+            mongoose.disconnect(()=>{ console.log('disconnect');});
+        });
 
-        Kitten.find({ name: /^fluff/ }, (x)=>console.log(x));
+      //  Kitten.find({ name: /^fluff/ }, (x)=>console.log(x));
+
     });
 
-
+    mongoose.disconnect(()=>{ console.log('disconnect');});
 });
 
+module.exports = () =>{
+
+    let db_connection = mongoose.connection;
+    return {
+
+
+    }
+};
+
+var MongoClient = require('mongodb').MongoClient;
+
+var state = {
+    db: null,
+};
+
+exports.connect = function(url, done) {
+    if (state.db) return done();
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) return done(err);
+        state.db = db;
+        done()
+    })
+};
+
+exports.get = function() {
+    return state.db
+};
+
+exports.close = function(done) {
+    if (state.db) {
+        state.db.close(function(err, result) {
+            state.db = null;
+            state.mode = null;
+            done(err)
+        })
+    }
+};

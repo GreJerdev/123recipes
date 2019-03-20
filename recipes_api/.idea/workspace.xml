@@ -2,26 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d27e088d-c033-460f-a6c4-091dd19c9636" name="Default" comment="Merge branch 'api' of https://github.com/GreJerdev/123recipes into api">
-      <change afterPath="$PROJECT_DIR$/Dump20190127.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/ingredient.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/recipe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/providers/test_my_sql.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/buy-list-model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/buy-list-model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/buy_list-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/buy_list-db-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/buy_list_to_item-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/buy_list_to_item-db-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/comment-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/comment-db-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/database/mysql_provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mysql_provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/ingredient-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/ingredient-db-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/ingredient-list-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/ingredient-list-db-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/instruction-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/instruction-db-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/media-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/media-db-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/providers/recipe-db-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/recipe-db-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ingredient-list-model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ingredient-list-model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/buy_list-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/buy_list-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/buy_list_to_item-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/buy_list_to_item-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/comment-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/comment-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/ingredient-list-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/ingredient-list-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/ingredient-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/ingredient-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/instruction-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/instruction-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/media-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/media-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/recipe-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/recipe-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongo/recipe-step-mongo-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongo/recipe-step-mongo-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/database/mongodb_provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/database/mongodb_provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/recipe-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/recipe-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/test_my_sql.js" beforeDir="false" afterPath="$PROJECT_DIR$/providers/test-recipe-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,75 +26,101 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/providers/ingredient-list-db-provider.js">
+        <entry file="file://$PROJECT_DIR$/providers/database/mongo/comment-mongo-provider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-955">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="54">
+              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/providers/database/mongo/ingredient-list-mongo-provider.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/ingredient-list-model.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/providers/database/mongo/ingredient-mongo-provider.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/providers/database/mongo/instruction-mongo-provider.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/providers/database/mongo/media-mongo-provider.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/providers/database/mongo/recipe-mongo-provider.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/providers/recipe-step-db-provider.js">
+        <entry file="file://$PROJECT_DIR$/providers/database/mongo/recipe-step-mongo-provider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1908">
-              <caret line="133" column="10" selection-start-line="133" selection-start-column="10" selection-end-line="133" selection-end-column="10" />
+            <state relative-caret-position="534">
+              <caret line="52" column="74" selection-start-line="52" selection-start-column="74" selection-end-line="52" selection-end-column="74" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+        <entry file="file://$PROJECT_DIR$/models/recipe-steps-model.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/ingredient.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/providers/buy_list-db-provider.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="172" column="1" selection-start-line="172" selection-start-column="1" selection-end-line="172" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/providers/buy_list_to_item-db-provider.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/providers/instruction-db-provider.js">
+        <entry file="file://$PROJECT_DIR$/models/ingredient-model.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>logger</find>
       <find>createIngredientList</find>
+      <find>success</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -115,14 +135,30 @@
         <option value="$PROJECT_DIR$/providers/recipe-db-provider.js" />
         <option value="$PROJECT_DIR$/providers/buy_list-db-provider.js" />
         <option value="$PROJECT_DIR$/providers/ingredient-list-db-provider.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/providers/comment-db-provider.js" />
+        <option value="$PROJECT_DIR$/configuration/config.json" />
+        <option value="$PROJECT_DIR$/providers/database/datebase-provider-factory.js" />
+        <option value="$PROJECT_DIR$/providers/recipe-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongodb_provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/buy_list-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/buy_list_to_item-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/comment-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/ingredient-list-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/models/ingredient-list-model.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/ingredient-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/instruction-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/media-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/recipe-mongo-provider.js" />
+        <option value="$PROJECT_DIR$/providers/database/mongo/recipe-step-mongo-provider.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2560" />
-    <option name="y" value="25" />
+    <option name="y" value="-2" />
     <option name="width" value="2560" />
-    <option name="height" value="1350" />
+    <option name="height" value="1442" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -131,23 +167,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="recipes_api" type="b2602c69:ProjectViewProjectNode" />
               <item name="recipes_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="recipes_api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="recipes_api" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="recipes_api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="recipes_api" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="recipes_api" type="b2602c69:ProjectViewProjectNode" />
@@ -162,21 +187,41 @@
             <path>
               <item name="recipes_api" type="b2602c69:ProjectViewProjectNode" />
               <item name="recipes_api" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="providers" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recipes_api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recipes_api" type="462c0819:PsiDirectoryNode" />
+              <item name="providers" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="mongo" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553071196128" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/providers/database/mongo" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/providers/database/mysql" />
+      <recent name="$PROJECT_DIR$/providers/database" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -225,7 +270,9 @@
       <updated>1548335705008</updated>
       <workItem from="1548335706366" duration="3322000" />
       <workItem from="1548343299607" duration="2036000" />
-      <workItem from="1552209282585" duration="1226000" />
+      <workItem from="1552209282585" duration="8242000" />
+      <workItem from="1552912664715" duration="2010000" />
+      <workItem from="1553066984752" duration="2555000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'api' of https://github.com/GreJerdev/123recipes into api">
       <created>1552210198039</created>
@@ -234,23 +281,51 @@
       <option name="project" value="LOCAL" />
       <updated>1552210198039</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge branch 'api' of https://github.com/GreJerdev/123recipes into api">
+      <created>1552210555047</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1552210555047</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Merge branch 'api' of https://github.com/GreJerdev/123recipes into api">
+      <created>1552219956624</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1552219956624</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactoring database module">
+      <created>1552223408147</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1552223408147</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added db-provider factory">
+      <created>1552224121934</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552224121934</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6584000" />
+    <option name="totallyTimeSpent" value="18165000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2560" y="25" width="2560" height="1350" extended-state="6" />
+    <frame x="0" y="-2" width="2560" height="1442" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25377885" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25775656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -259,10 +334,11 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.33005732" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3069307" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.32923833" />
-      <window_info anchor="right" id="Maven" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32923833" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -273,7 +349,41 @@
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Maven Projects" order="9" />
+      <window_info anchor="right" id="Maven" order="10" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25377885" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="1" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" />
+      <window_info anchor="bottom" id="Run" order="4" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.33005732" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="12" visible="true" weight="0.32923833" />
+      <window_info anchor="right" id="Maven" order="0" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="SciView" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Maven Projects" order="10" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -299,21 +409,64 @@
         <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/models_api/rapyd/payouts/payout-gateway.js.map" />
         <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/services/vault-gateway-card-issuing-service.js.map" />
         <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/services/vault-gateway-card-issuing-service.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/providers/rapyd/risk_management_providers/sift_science/sift-science-utilities.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/providers/rapyd/risk_management_providers/sift_science/sift-science-utilities.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/models/index.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/models/ecomprocessing-models.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/models/index.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/models/ecomprocessing-models.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/ecomprocessing-utilities.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/ecomprocessing-provider-pci.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/ecomprocessing-provider-pci.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/ecomprocessing-config.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/ecomprocessing-utilities.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/ecomprocessing/ecomprocessing-config.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/molpay/molpay-provider-pci.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/molpay/molpay-provider-pci.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/molpay/molpay-config.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/molpay/molpay-config.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/molpay/molpay-utilities.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/molpay/molpay-utilities.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/models_api/rapyd/rapyd-gw-card-issuing-behavior.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/models_api/rapyd/rapyd-gw-card-issuing-behavior.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/controllers/ts/rapyd/card-issuing-authorization-controller.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/controllers/ts/rapyd/card-issuing-authorization-controller.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/providers/rapyd/my_sql_providers/card-issuing-authorization.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/providers/rapyd/my_sql_providers/card-issuing-authorization.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/db_services/card-issuing-authorization.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/db_services/card-issuing-authorization.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/card-issuing-gateway-service.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/card-issuing-gateway-service.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/card-issuing-authorization-service.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/card-issuing-service.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/card-issuing-authorization-service.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/cd_api/api/services/rapyd/card-issuing-service.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/rapyd_gw/rapyd-gw-provider-pci.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/rapyd_gw/rapyd-gw-provider-pci.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/rapyd_gw/rapyd-gw-provider-card-issuing.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/providers/gateways/rapyd_gw/rapyd-gw-provider-card-issuing.js.map" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/models_api/rapyd-gw-card-issuing-behavior.js" />
+        <option value="$PROJECT_DIR$/../../../rapyd/git/rapyd-vault-service/api/models_api/rapyd-gw-card-issuing-behavior.js.map" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
       </list>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'api' of https://github.com/GreJerdev/123recipes into api" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'api' of https://github.com/GreJerdev/123recipes into api" />
+    <MESSAGE value="refactoring database module" />
+    <MESSAGE value="added db-provider factory" />
+    <option name="LAST_COMMIT_MESSAGE" value="added db-provider factory" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/providers/database/mysql_provider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2556">
-          <caret line="142" column="4" selection-start-line="142" selection-start-column="4" selection-end-line="142" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utilities/logger.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -344,58 +497,10 @@
     <entry file="file://$PROJECT_DIR$/Dump20181004.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/providers/ingredient-db-provider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/providers/media-db-provider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/providers/test_my_sql.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/providers/recipe-db-provider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/providers/buy_list-db-provider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="172" column="1" selection-start-line="172" selection-start-column="1" selection-end-line="172" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/providers/buy_list_to_item-db-provider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/providers/instruction-db-provider.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/../.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/ingredient.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/providers/ingredient-list-db-provider.js">
@@ -405,10 +510,217 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/providers/recipe-step-db-provider.js">
+    <entry file="file://$PROJECT_DIR$/../forloop.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/ingredient.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1908">
-          <caret line="133" column="10" selection-start-line="133" selection-start-column="10" selection-end-line="133" selection-end-column="10" />
+        <state>
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/test_my_sql.js" />
+    <entry file="file://$PROJECT_DIR$/providers/buy_list_to_item-provider.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/comment-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/ingredient-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/media-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/buy_list-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="110" column="11" selection-start-line="110" selection-start-column="10" selection-end-line="110" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mysql/buy_list-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/datebase-provider-factory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mongoose/node_modules/mongodb/lib/operations/collection_ops.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15876">
+          <caret line="882" column="2" selection-start-line="882" selection-start-column="2" selection-end-line="882" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/kareem/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="100" column="14" selection-start-line="100" selection-start-column="14" selection-end-line="100" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/recipe-step-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/test-recipe-provider.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mysql_provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2556">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/recipe-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="72" selection-start-line="15" selection-start-column="72" selection-end-line="15" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/instruction-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongodb_provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="88" column="30" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/buy-list-to-item-model.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/buy_list-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/buy_list_to_item-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="68" lean-forward="true" selection-start-line="3" selection-end-line="3" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/comment-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/ingredient-list-model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/ingredient-list-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/ingredient-model.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/ingredient-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/instruction-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/media-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/recipe-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/recipe-steps-model.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/providers/database/mongo/recipe-step-mongo-provider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="52" column="74" selection-start-line="52" selection-start-column="74" selection-end-line="52" selection-end-column="74" />
         </state>
       </provider>
     </entry>

@@ -1,38 +1,19 @@
 "use strict";
 
-let mysql_provider = require("./database/mysql_provider")();
+
+let database_factory = require('./database/datebase-provider-factory');
 let models = require("../models/recipe-model");
 
 module.exports = class RecipeProvider {
-  constructor() {
-    this.insert_query = `SET @recipe_id = fn_uuid_to_bin(?) ;
-SET @recipe_name = ? ;
-SET @recipe_parent = ? ;
-SET @recipe_description = ? ;
 
-INSERT INTO recipes
-(recipe_id,
-recipe_parent,
-recipe_name,
-recipe_description)
-VALUES
-( 
-@recipe_id,
-@recipe_parent,
-@recipe_name,
-@recipe_description
-);`;
-    this.select_by_id_query = `SET @recipe_id = fn_uuid_to_bin(?);
-        select fn_uuid_from_bin(recipe_id) as recipe_id,
-        fn_uuid_from_bin(recipe_parent) as recipe_parent,
-        recipe_name,
-        recipe_description,
-        recipe_stars 
-        from recipes 
-        where recipe_id = @recipe_id  and recipe_is_deleted = 0`;
-  }
+    db_provider = null;
+
+    constructor() {
+        this.db_provider = database_factory();
+    }
 
     async createRecipe(new_recipe, conn = null) {
+        const recipe_db_provider = this.db_provider.GetRecipeProvider();
         let is_external_connection = true;
         if (conn == null) {
             conn = await mysql_provider.getConnection();
@@ -150,7 +131,7 @@ VALUES
         }
     }
 
-    async getListRecipe(search_by, order_by,page_number, page_size) {
+    async getListRecipe(search_by, order_by, page_number, page_size) {
         try {
             const conn = await mysql_provider.getConnection();
             let first_row = page_number || 0;
@@ -175,31 +156,31 @@ VALUES
             limit @first_row, @last_row  
             `;
 
-      let result = await mysql_provider.executeQueryWithConnection(
-        query,
-        this.select_by_id_query,
-        [new_recipe.id]
-      );
+            let result = await mysql_provider.executeQueryWithConnection(
+                query,
+                this.select_by_id_query,
+                [new_recipe.id]
+            );
 
-      return Promise.resolve(result);
-    } catch (err) {
-      logger.log(err);
-      return Promise.reject(err);
+            return Promise.resolve(result);
+        } catch (err) {
+            logger.log(err);
+            return Promise.reject(err);
+        }
     }
-  }
 
-  async getRecipeById(recipe_id, conn = null) {
-    try {
-      let result = await mysql_provider.executePromisedQueryConnection(conn, this.select_by_id_query, [
-        recipe_id
-      ]);
-      if (result.length > 0) {
-        return Promise.resolve(result[0]);
-      }
-      return Promise.reject("Error_Recipe_Not_exist");
-    } catch (err) {
-      logger.log(err);
-      return Promise.reject(err);
+    async getRecipeById(recipe_id, conn = null) {
+        try {
+            let result = await mysql_provider.executePromisedQueryConnection(conn, this.select_by_id_query, [
+                recipe_id
+            ]);
+            if (result.length > 0) {
+                return Promise.resolve(result[0]);
+            }
+            return Promise.reject("Error_Recipe_Not_exist");
+        } catch (err) {
+            logger.log(err);
+            return Promise.reject(err);
+        }
     }
-  }
 };
