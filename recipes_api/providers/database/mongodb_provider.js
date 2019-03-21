@@ -21,7 +21,11 @@ exports.connect = async () => {
     }
 };
 
-exports.get = () => {
+exports.get = async() => {
+
+    if(!state.db){
+       await exports.connect();
+    }
     console.log(`is db null ${state.db === null}`);
     return state.db;
 };
