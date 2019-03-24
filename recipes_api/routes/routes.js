@@ -2,13 +2,15 @@
 
 const authentication = require('../controllers/authentication');
 const ingredient = require('../controllers/ingredient');
-const shop_list = require('../controllers/shop_list');
+const shop_list = require('../controllers/shop-list');
 const ingredient_list = require('../controllers/ingredient_list');
 const instruction = require('../controllers/instruction');
 const media = require('../controllers/media');
 const recipe_steps = require('../controllers/recipe_steps');
 const recipe = require('../controllers/recipe');
-const path = require("path");
+const buy_list = require('../controllers/buy-list');
+
+const path = require('path');
 
 module.exports = (app, express) => {
     app.use('/public', express.static(path.join(__dirname, 'public')));
@@ -20,5 +22,6 @@ module.exports = (app, express) => {
     app.use('/api/v1/media', media);
     app.use('/api/v1/recipe-steps', recipe_steps);
     app.use('/api/v1/recipe', recipe);
+    app.use('/api/v1/buy_list', buy_list);
     app.get('/', (req, res) => res.send('Hello World!'));
-}
+};

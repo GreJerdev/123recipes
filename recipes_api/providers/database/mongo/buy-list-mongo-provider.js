@@ -9,6 +9,8 @@ async function f() {
         let buylist = d.collection('buy_list');
         let dfg = new BuyList();
 
+        buylist.find({"name":"name"})
+
         dfg.name = "weekend products";
         dfg.description = "";
         dfg.parent = null;
@@ -30,7 +32,7 @@ module.exports = class buyListProvider {
 
     }
 
-    async createBuyList(buy_list, conn) {
+    async create(buy_list, conn) {
         let log_path = 'ingredient_list/create_buy_list -';
 
         try {
@@ -46,7 +48,7 @@ module.exports = class buyListProvider {
         }
     }
 
-    async updateBuyList(buy_list, conn) {
+    async update(buy_list, conn) {
         let log_path = 'ingredient_list/update_buy_list -';
         try {
             this.db_connection = await db.get();
@@ -57,7 +59,7 @@ module.exports = class buyListProvider {
         }
     }
 
-    async deleteBuyList(buy_list_id, conn) {
+    async delete(buy_list_id, conn) {
         let log_path = 'ingredient_list/delete_buy_list -';
         try {
             this.db_connection = await db.get();
@@ -67,7 +69,7 @@ module.exports = class buyListProvider {
         }
     }
 
-    async getBuyListById(buy_list_id, conn) {
+    async getById(buy_list_id, conn) {
         let log_path = 'buy_list/getBuyListById -';
         try {
             this.db_connection = await db.get();
@@ -79,7 +81,7 @@ module.exports = class buyListProvider {
         }
     }
 
-    async getListOfBuyList(search_by, order_by, page_number, page_size, limit) {
+    async getList(search_by, order_by, page_number, page_size, limit, connection) {
         let log_path = 'ingredient_list/get_list_buy_list -';
         try {
             this.db_connection = await db.get();
