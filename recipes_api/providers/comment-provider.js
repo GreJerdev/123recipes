@@ -64,7 +64,7 @@ CREATE TABLE `comments` (
         }
     }
 
-    updateComment(comment,conn = null){
+    async updateComment(comment,conn = null){
         let is_external_connection = true;
         if (conn == null) {
           conn = await mysql_provider.getConnection();
@@ -108,7 +108,7 @@ CREATE TABLE `comments` (
         }
     }
 
-    deleteComment(comment,conn = null){
+    async deleteComment(comment,conn = null){
         let is_external_connection = true;
         if (conn == null) {
           conn = await mysql_provider.getConnection();
@@ -152,7 +152,7 @@ CREATE TABLE `comments` (
         }
     }
 
-    getListComment(search_by, order_by, page_number, page_size, limit,conn = null, ){
+    async getListComment(search_by, order_by, page_number, page_size, limit,conn = null, ){
 
     }
 

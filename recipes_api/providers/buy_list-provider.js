@@ -75,7 +75,7 @@ module.exports = class buyListProvider {
             if (!conn) {
                 conn = await mysql_provider.getConnection();
             }
-            query = `
+           let  query = `
 SET @id = fn_uuid_to_bin(?);
 SET @name = ?;
 SET @description = ?;
@@ -101,7 +101,7 @@ WHERE buy_list_id = @id
         }
     }
 
-    async  deleteBuyList() {
+    async  deleteBuyList(conn) {
         let log_path = 'ingredient_list/delete_buy_list -'
         let is_external_connection = false;
         try {
@@ -153,11 +153,11 @@ WHERE buy_list_id = @id
         }
     }
 
-    async getListOfBuyList(search_by, order_by, page_number, page_size, limit) {
+    async getListOfBuyList(search_by, order_by, page_number, page_size, limit,conn) {
         let log_path = 'ingredient_list/get_list_buy_list -'
         try {
             if (!conn) {
-                conn = await mysql_provider.getConnection();
+                 conn = await mysql_provider.getConnection();
             }
             const params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
             await mysql_provider.executeQueryWithConnection(conn, this.insert_query, params);
