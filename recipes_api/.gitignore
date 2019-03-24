@@ -4,4 +4,4 @@
 workspace.xml
 node_modules/
 *.log
-
+*.iml
