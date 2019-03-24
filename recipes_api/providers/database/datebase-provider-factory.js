@@ -14,37 +14,37 @@ let mongo_recipe_step_provider = require('./mongo/recipe-step-mongo-provider');
 
 module.exports = function () {
 
-    function getObjectDBProvider()
+    function getObjectDBProvider(object_name)
     {
         switch (object_name) {
             case 'buy_list':
-                return mongo_buy_list_provider;
+                return new mongo_buy_list_provider();
                 break;
             case 'buy_to_items':
-                return mongo_buy_to_item_provider;
+                return new mongo_buy_to_item_provider();
                 break;
             case 'comment':
-                return mongo_comment_provider;
+                return new mongo_comment_provider();
                 break;
             case 'ingredient_list':
-                return mongo_ingredient_list_provider;
+                return new mongo_ingredient_list_provider();
                 break;
             case 'ingredient':
-                return mongo_ingredient_provider;
+                return new mongo_ingredient_provider();
                 break;
             case 'instruction':
-                return mongo_instruction_provider;
+                return new mongo_instruction_provider();
                 break;
             case 'media':
-                return mongo_media_provider;
+                return new mongo_media_provider();
                 break;
             case 'recipe':
-                return mongo_recipe_provider;
+                return new mongo_recipe_provider();
                 break;
             case 'recipe_step':
-                return mongo_recipe_step_provider;
+                return new mongo_recipe_step_provider();
                 break;
         }
     }
-    return {getObjectDBProvider:getObjectDBProvider};
-};
+    return {"getObjectDBProvider":getObjectDBProvider};
+}();

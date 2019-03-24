@@ -1,6 +1,6 @@
 "use strict";
 
-let db = require('../mongodb_provider')();
+let db = require('../mongodb_provider');
 let Comment = require("../../../models/comment-model");
 
 module.exports = class CommentProvider {

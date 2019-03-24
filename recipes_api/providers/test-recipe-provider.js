@@ -2,23 +2,26 @@
 
 require('../utilities/logger');
 
+
+const  BuyList = require('../models/buy-list-model');
 const uuid = require('uuid/v4');
-let buy_list_db_provider = require("./buy-list-provider");
+let buyListDBProvider = require("./buy-list-provider");
 
 
 //create test
 
-async function create_puy_list() {
-    let db_provider = new buy_list_db_provider();
-    let p = await db_provider.createBuyList(uuid(), "name", "description", null, null);
+async function createBuyList(buy_list) {
+    let db_provider = new buyListDBProvider();
+
+    let p = await db_provider.createBuyList(buy_list);
     console.log(p);
     return Promise.resolve(p);
 }
 
 //get test
 
-async function get_puy_list(id) {
-    let db_provider = new buy_list_db_provider();
+async function getBuyList(id) {
+    let db_provider = new buyListDBProvider();
     let p = await db_provider.getBuyListById(id, null);
     console.log(p);
     return Promise.resolve(p);

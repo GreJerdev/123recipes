@@ -6,7 +6,7 @@ let models = require("../models/recipe-model");
 
 module.exports = class RecipeProvider {
 
-    db_provider = null;
+
 
     constructor() {
         this.db_provider = database_factory();

@@ -5,7 +5,7 @@ module.exports = class BuyList {
     this.id = 0;
     this.name = "";
     this.description = "";
-    this.parent = 0;
+    this.parent = null;
     this.create_at = 0;
   }
 };

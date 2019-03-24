@@ -1,7 +1,7 @@
 "use strict";
 
-let db = require('../mongodb_provider')();
-let Recipe = require("../models/recipe-model");
+let db = require('../mongodb_provider');
+let Recipe = require("../../../models/recipe-model");
 
 module.exports = class RecipeProvider {
   constructor() { }

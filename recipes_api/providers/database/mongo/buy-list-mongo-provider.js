@@ -9,7 +9,7 @@ async function f() {
         let buylist = d.collection('buy_list');
         let dfg = new BuyList();
 
-        buylist.find({"name":"name"})
+        buylist.find({"name": "name"})
 
         dfg.name = "weekend products";
         dfg.description = "";
@@ -27,7 +27,7 @@ async function f() {
 f();
 module.exports = class buyListProvider {
 
-    db_connection = null;
+
     constructor() {
 
     }
@@ -37,8 +37,9 @@ module.exports = class buyListProvider {
 
         try {
             this.db_connection = await db.get();
-            let result = await this.db_connection.insertOne(buy_list);
-            let item = this.getBuyListById(result._id);
+            let buy_list_collection = this.db_connection.collection('buy_list');
+            let result = await buy_list_collection.insertOne(buy_list);
+            let item = await this.getById(result.insertedId);
             return Promise.resolve(item);
         } catch (err) {
             if (is_external_connection === false) {
@@ -73,8 +74,9 @@ module.exports = class buyListProvider {
         let log_path = 'buy_list/getBuyListById -';
         try {
             this.db_connection = await db.get();
-            await this.db_connection.find({"_id": buy_list_id});
-            return Promise.resolve(null);
+            let buy_list_collection = this.db_connection.collection('buy_list');
+            let buy_list = await buy_list_collection.find({"_id": buy_list_id});
+            return Promise.resolve(buy_list);
         } catch (err) {
             logger.err(`${log_path} error - ${err}`);
             return Promise.reject(err);

@@ -1,13 +1,13 @@
 "use strict";
 
-let db = require('../mongodb_provider')();
+let db = require('../mongodb_provider');
 let media = require("../../../models/media-model");
 
 module.exports = class MediaProvider{
 
-    className = MediaProvider;
-    constructor(){
 
+    constructor(){
+        this.className = MediaProvider;
     }
 
     async createMedia(){

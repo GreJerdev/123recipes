@@ -1,6 +1,6 @@
 "use strict";
 
-let provider_factory = require('./database/datebase-provider-factory')();
+let provider_factory = require('./database/datebase-provider-factory');
 let BuyList = require('../models/buy-list-model');
 
 module.exports = class buyListProvider {

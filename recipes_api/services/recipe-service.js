@@ -69,7 +69,7 @@ module.exports = class RecipeService {
             console.log("update_recipe - start")
             let update_recipe = new recipe_model(recipe)
             await this.recipe_db_provider.updateRecipe(update_recipe);
-            recipe = await this.getRecipeById(update_recipe.id)
+            let recipe = await this.getRecipeById(update_recipe.id)
             console.log("update_recipe - end")
             return Promise.resolve(recipe);
         } catch (err) {

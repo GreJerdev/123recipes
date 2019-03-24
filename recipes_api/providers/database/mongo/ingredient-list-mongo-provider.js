@@ -1,6 +1,6 @@
 "use strict";
 
-let db = require('../mongodb_provider')();
+let db = require('../mongodb_provider');
 let IngredientList = require("../../../models/ingredient-list-model");
 
 module.exports = class IngredientListProvider{
