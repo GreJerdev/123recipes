@@ -1,5 +1,6 @@
 "use strict";
 
+let ERROR = require('../utilities/errors');
 let provider_factory = require('./database/datebase-provider-factory');
 let BuyList = require('../models/buy-list-model');
 
@@ -13,7 +14,9 @@ module.exports = class buyListProvider {
         let log_path = 'buy-list-provider/create_buy_list -';
         let is_external_connection = true;
         try {
-            buy_list = await this.db_connection.create(buy_list);
+            let result = await this.db_connection.create(buy_list);
+            logger.verbose(`${log_path} db result - ${result}`);
+            buy_list = new BuyList(result);
             return Promise.resolve(buy_list);
         } catch (err) {
             if (is_external_connection === false) {
@@ -58,7 +61,13 @@ module.exports = class buyListProvider {
 
         try {
             let result = await this.db_connection.getById(buy_list_id);
-            return Promise.resolve(result);
+            if (resilt) {
+                let buy_list = BuyList(result);
+                return Promise.resolve(buy_list);
+            } else {
+                logger.err(`${log_path} error - ${buy_list_id} not found`);
+                return Promise.reject(ERROR.ERROR_BUY_LIST_NOT_FOUND);
+            }
         } catch (err) {
             logger.err(`${log_path} error - ${err}`);
             return Promise.reject(err);

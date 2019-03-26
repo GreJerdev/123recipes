@@ -1,8 +1,8 @@
 'use strict';
 
 const express = require('express'), router = express.Router();
-const RecipeService = require('../services/recipe-service')
-const recipeModel = require('../models/recipe-model')
+const RecipeService = require('../services/recipe-service');
+const recipeModel = require('../models/recipe-model');
 router.post('/', async (req, res) => {
     try {
         logger.info("recipe get ")
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
         recipe = await recipe_service.create_recipe(recipe);
         res.done(recipe);
     } catch (err) {
-        res.error(err);
+        res.ERROR(err);
     }
 });
 
@@ -27,7 +27,7 @@ router.get('/:recipe_id', async (req, res) => {
     } catch (err) {
         res.error(err);
     }
-})
+});
 
 router.post('/:recipe_id', async (req, res) => {
     try {
@@ -97,7 +97,7 @@ router.post('/:recipe_id/addinstructions', async (req, res) => {
 
 router.post('/:recipe_id/addsteps', async (req, res) => {
     try {
-        logger.info("recipe get ")
+        logger.info("recipe get ");
         let recipe_service = new RecipeService();
         let recipe_id = req.params['recipe_id'];
         logger.info(recipe_id)
@@ -106,7 +106,7 @@ router.post('/:recipe_id/addsteps', async (req, res) => {
     } catch (err) {
         res.error(err);
     }
-})
+});
 
 
 module.exports = router; 

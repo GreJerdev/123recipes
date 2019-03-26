@@ -3,7 +3,7 @@
 const recipe_model = require('../models/recipe-model');
 const recipe_db_provider = require('../providers/recipe-provider');
 const ingredient_service = require('./ingredient-service');
-const error = require('../utilities/errors').error;
+const error = require('../utilities/errors');
 const uuid = require('uuid');
 
 

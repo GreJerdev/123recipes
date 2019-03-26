@@ -16,13 +16,13 @@ module.exports = class BuyListService {
     }
 
     async createBuyList(buy_list) {
-
+        let method_name = 'BuyListService/createBuyList';
         try {
             buy_list.id = uuid();
-
+            buy_list.create_at = new Date().getTime();
             return await this.db_provider.createBuyList(buy_list);
         } catch (err) {
-
+        logger.error(`${method_name} - error Fails to create buy_list ${err}`);
         }
 
     }

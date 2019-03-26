@@ -31,7 +31,7 @@ router.get('/:bay_list_id', async (req, res) => {
         let recipe = await buy_list_service.get_recipe_by_id(recipe_id);
         res.done(recipe);
     } catch (err) {
-        res.error(err);
+        res.ERROR(err);
     }
 })
 
@@ -44,7 +44,7 @@ router.post('/:bay_list_id', async (req, res) => {
         let recipe = await buy_list_service.update_recipe(req.body);
         res.done(recipe);
     } catch (err) {
-        res.error(err);
+        res.ERROR(err);
     }
 });
 
@@ -57,7 +57,7 @@ router.get('/', async (req, res) => {
         let recipe = await buy_list_service.getListBuyList(recipe_id);
         res.done(recipe);
     } catch (err) {
-        res.error(err);
+        res.ERROR(err);
     }
 });
 
@@ -70,7 +70,7 @@ router.delete('/:buy_list_id', async (req, res) => {
         let recipe = await buy_list_service.deleteBuyList(buy_list_id);
         res.done(recipe);
     } catch (err) {
-        res.error(err);
+        res.ERROR(err);
     }
 });
 
@@ -84,7 +84,7 @@ router.post('/:buy_list_id/update-items', async (req, res) => {
         let recipe = await buy_list_service.get_recipe_by_id(recipe_id);
         res.done(recipe);
     } catch (err) {
-        res.error(err);
+        res.ERROR(err);
     }
 })
 

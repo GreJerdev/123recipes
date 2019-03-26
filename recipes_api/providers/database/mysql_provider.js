@@ -122,7 +122,7 @@ module.exports = () => {
         if (connection) {
           console.log(`MySQLProvider.rollbackTransaction start`);
           connection.rollback(() => {
-            // cdLogger.error('rollback');
+            // cdLogger.ERROR('rollback');
             connection.release();
             return resolve(true);
           });

@@ -1,11 +1,7 @@
-
-module.exports = {
-
-   
-   
-    error:{
+module.exports =
+    {
         PARENT_NOT_FOUND: "PARENT_NOT_FOUND",
-        INVALID_INGREDIENT: "INVALID_INGREDIENT"
+        INVALID_INGREDIENT: "INVALID_INGREDIENT",
+        ERROR_BUY_LIST_NOT_FOUND: "ERROR_BUY_LIST_NOT_FOUND"
     }
 
-} 
