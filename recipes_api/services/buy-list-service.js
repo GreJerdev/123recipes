@@ -3,7 +3,7 @@
 
 const BuyList = require('../models/buy-list-model');
 let buyListDBProvider = require("../providers/buy-list-provider");
-
+let uuid =  require('uuid').v4;
 
 module.exports = class BuyListService {
 
@@ -18,6 +18,8 @@ module.exports = class BuyListService {
     async createBuyList(buy_list) {
 
         try {
+            buy_list.id = uuid();
+
             return await this.db_provider.createBuyList(buy_list);
         } catch (err) {
 

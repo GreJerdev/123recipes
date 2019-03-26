@@ -35,10 +35,12 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
 
     async create(buy_list, conn) {
         let log_path = 'ingredient_list/create_buy_list -';
-
+        let is_external_connection = true;
         try {
             this.db_connection = await db.get();
             let buy_list_collection = this.db_connection.collection('buy_list');
+            let a = new mongo.Binary( Buffer.from( buy_list.id, 'utf8' ));
+            buy_list._id = a;
             let result = await buy_list_collection.insertOne(buy_list);
             let item = await this.getById(result.insertedId.toString());
             return Promise.resolve(item);
@@ -76,7 +78,7 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         try {
             this.db_connection = await db.get();
             let buy_list_collection = this.db_connection.collection('buy_list');
-            let id = new mongo.ObjectID(buy_list_id);
+            let id =  new mongo.Binary( Buffer.from( buy_list_id, 'utf8' ));
             let buy_list = await buy_list_collection.findOne({_id: id});
             return Promise.resolve(buy_list);
         } catch (err) {
