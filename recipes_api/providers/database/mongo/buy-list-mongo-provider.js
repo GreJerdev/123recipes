@@ -1,6 +1,7 @@
 "use strict";
 
 let db = require('../mongodb_provider');
+let mongo = require('mongodb');
 let BuyList = require("../../../models/buy-list-model");
 
 async function f() {
@@ -25,11 +26,11 @@ async function f() {
 }
 
 f();
-module.exports = class buyListProvider {
+module.exports = class buyListProvider extends db.MongoDBProvider {
 
 
     constructor() {
-
+        super();
     }
 
     async create(buy_list, conn) {
@@ -39,7 +40,7 @@ module.exports = class buyListProvider {
             this.db_connection = await db.get();
             let buy_list_collection = this.db_connection.collection('buy_list');
             let result = await buy_list_collection.insertOne(buy_list);
-            let item = await this.getById(result.insertedId);
+            let item = await this.getById(result.insertedId.toString());
             return Promise.resolve(item);
         } catch (err) {
             if (is_external_connection === false) {
@@ -75,7 +76,8 @@ module.exports = class buyListProvider {
         try {
             this.db_connection = await db.get();
             let buy_list_collection = this.db_connection.collection('buy_list');
-            let buy_list = await buy_list_collection.find({"_id": buy_list_id});
+            let id = new mongo.ObjectID(buy_list_id);
+            let buy_list = await buy_list_collection.findOne({_id: id});
             return Promise.resolve(buy_list);
         } catch (err) {
             logger.err(`${log_path} error - ${err}`);

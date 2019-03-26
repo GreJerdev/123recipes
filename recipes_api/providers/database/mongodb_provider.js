@@ -6,6 +6,12 @@ var state = {
     db: null,
 };
 
+
+exports.MongoDBProvider = class MongoDBProvider{
+
+};
+
+
 exports.connect = async () => {
     try {
         if (!state.db) {

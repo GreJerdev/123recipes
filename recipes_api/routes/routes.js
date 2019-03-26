@@ -22,6 +22,6 @@ module.exports = (app, express) => {
     app.use('/api/v1/media', media);
     app.use('/api/v1/recipe-steps', recipe_steps);
     app.use('/api/v1/recipe', recipe);
-    app.use('/api/v1/buy_list', buy_list);
+    app.use('/api/v1/buy-list', buy_list);
     app.get('/', (req, res) => res.send('Hello World!'));
 };
