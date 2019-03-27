@@ -38,7 +38,7 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         try {
             this.db_connection = await db.get();
             let buy_list_collection = this.db_connection.collection('buy_list');
-            let a = new mongo.Binary( Buffer.from( buy_list.id, 'utf8' ));
+            let a = new mongo.Binary(Buffer.from(buy_list.id, 'utf8'));
             buy_list._id = a;
             let result = await buy_list_collection.insertOne(buy_list);
             let item = await this.getById(result.insertedId.toString());
@@ -77,7 +77,7 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         try {
             this.db_connection = await db.get();
             let buy_list_collection = this.db_connection.collection('buy_list');
-            let id =  new mongo.Binary( Buffer.from( buy_list_id, 'utf8' ));
+            let id = new mongo.Binary(Buffer.from(buy_list_id, 'utf8'));
             let buy_list = await buy_list_collection.findOne({_id: id});
             return Promise.resolve(buy_list);
         } catch (err) {
@@ -90,6 +90,11 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         let log_path = 'ingredient_list/get_list_buy_list -';
         try {
             this.db_connection = await db.get();
+
+            let buy_list_collection = this.db_connection.collection('buy_list');
+            buy_list_collection.find().skip(page_number > 0 ? ((page_number - 1) * page_size) : 0).limit(page_size);
+
+
             return Promise.resolve(result);
         } catch (err) {
             logger.err(`${log_path} error - ${err}`);
