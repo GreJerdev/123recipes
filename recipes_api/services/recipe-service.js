@@ -112,7 +112,7 @@ module.exports = class RecipeService {
                 return Promise.reject(error.INVALID_INGREDIENT);
             }
             const recipe = await this.recipe_db_provider.getRecipeById(recipe_id);
-            console.log(`${arguments.callee.name} - end`)
+            console.log(`${arguments.caller.name} - end`)
             return Promise.resolve(recipe);
         } catch (err) {
             console.log(`${arguments.callee.name} - error, ${err}`);

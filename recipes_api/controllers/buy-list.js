@@ -1,13 +1,14 @@
 'use strict';
 
-const express = require('express')
+const express = require('express');
 const router = express.Router();
 const BuyListService = require('../services/buy-list-service');
 const BayList = require('../models/buy-list-model');
 
 router.post('/', async (req, res) => {
     try {
-        logger.info("recipe get ");
+        const method_name = 'buy-list/create';
+        logger.info(`${method_name} - start`);
         let buy_list_service = new BuyListService();
         let buy_list = new BayList();
         buy_list.name = req.body.name;
@@ -16,77 +17,96 @@ router.post('/', async (req, res) => {
 
         logger.silly(buy_list);
         let bay_list = await buy_list_service.createBuyList(buy_list);
+        logger.info(`${method_name} - end`);
         res.done(bay_list);
     } catch (err) {
+        logger.error(`${method_name} - error - ${err}`);
         res.error(err);
     }
 });
 
 router.get('/:bay_list_id', async (req, res) => {
     try {
-        logger.info("bay_list get ")
+        const method_name = 'buy-list/getById';
+        logger.info(`${method_name} - start`);
         let buy_list_service = new BuyListService();
         let recipe_id = req.params['recipe_id'];
-        logger.info(recipe_id)
-        let recipe = await buy_list_service.get_recipe_by_id(recipe_id);
+        logger.info(recipe_id);
+        let recipe = await buy_list_service.getById(recipe_id);
+        logger.info(`${method_name} - end`);
+
         res.done(recipe);
     } catch (err) {
-        res.ERROR(err);
+        logger.error(`${method_name} - error - ${err}`);
+        res.error(err);
     }
-})
+});
 
 router.post('/:bay_list_id', async (req, res) => {
+    const method_name = 'buy-list/update';
+    logger.info(`${method_name} - start`);
     try {
         console.log("bay-list update");
         let buy_list_service = new BuyListService();
-        req.body.id = req.params['recipe_id'];
-        console.log(req.body)
-        let recipe = await buy_list_service.update_recipe(req.body);
+        logger.verbose(`${method_name} - request body req.body`);
+        let recipe = await buy_list_service.updateBuyList(req.body);
+        logger.info(`${method_name} - end`);
         res.done(recipe);
     } catch (err) {
-        res.ERROR(err);
+        logger.error(`${method_name} - error - ${err}`);
+        res.error(err);
     }
 });
 
 router.get('/', async (req, res) => {
+    const method_name = 'buy-list/getPage';
+    logger.info(`${method_name} - start`);
     try {
         console.log("bay-list list get ");
         let buy_list_service = new BuyListService();
-        let recipe_id = req.params['recipe_id'];
-        console.log(recipe_id)
-        let recipe = await buy_list_service.getListBuyList(recipe_id);
+        let search_by = req.params['search'];
+        let order_by = req.params['order'];
+        let page_number = req.params['page_number'];
+        let page_size = req.params['page_size'];
+        let recipe = await buy_list_service.getListBuyList(search_by, order_by, page_number, page_size );
+        logger.info(`${method_name} - end`);
         res.done(recipe);
     } catch (err) {
-        res.ERROR(err);
+        logger.error(`${method_name} - error - ${err}`);
+        res.error(err);
     }
 });
 
 router.delete('/:buy_list_id', async (req, res) => {
+    const method_name = 'buy-list/delete';
+    logger.info(`${method_name} - start`);
     try {
-        console.log("recipe get ")
+        console.log("recipe get ");
         let buy_list_service = new BuyListService();
         let buy_list_id = req.params['buy_list_id'];
         console.log(buy_list_id)
         let recipe = await buy_list_service.deleteBuyList(buy_list_id);
         res.done(recipe);
     } catch (err) {
-        res.ERROR(err);
+        logger.error(`${method_name} - error - ${err}`);
+        res.error(err);
     }
 });
 
 
-router.post('/:buy_list_id/update-items', async (req, res) => {
+router.post('/:buy_list_id/items', async (req, res) => {
     try {
         logger.info("recipe get ");
         let buy_list_service = new BuyListService();
         let recipe_id = req.params['recipe_id'];
         logger.info(recipe_id);
-        let recipe = await buy_list_service.get_recipe_by_id(recipe_id);
+     //   let recipe = await buy_list_service.(recipe_id);
         res.done(recipe);
     } catch (err) {
-        res.ERROR(err);
+        logger.error(`${method_name} - error - ${err}`);
+        res.error(err);
     }
-})
+});
 
 
 module.exports = router;
