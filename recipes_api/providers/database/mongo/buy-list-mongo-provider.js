@@ -19,7 +19,6 @@ async function f() {
 
         let result = await buylist.insertOne(dfg);
         //console.log(result);
-        console.log(await buylist.find({"_id": result._id}).toArray());
     } catch (err) {
         console.log(` error ${err}`);
     }

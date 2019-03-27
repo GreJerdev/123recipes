@@ -18,11 +18,11 @@ exports.connect = async () => {
             const url = configuration.db.mongodb.connection_string;
             let client = await MongoClient.connect(url);
             state.db = client.db(configuration.db.mongodb.data_base);
-            console.log(`connected to url`);
+            logger.info(`mongodb_provider/connect - connected to db - url - ${url}`);
         }
         return Promise.resolve()
     } catch (err) {
-        console.log(`fails to connect error ${err}`);
+        logger.error(`mongodb_provider/connect - parameter query -, ${err}`);
         return Promise.reject(err);
     }
 };
@@ -32,7 +32,7 @@ exports.get = async() => {
     if(!state.db){
        await exports.connect();
     }
-    console.log(`is db null ${state.db === null}`);
+    logger.silly(`mongodb_provider/get - is state.db null ? - ${state.db === null}`);
     return state.db;
 };
 

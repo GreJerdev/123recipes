@@ -6,8 +6,7 @@ const util = require('util');
 
 module.exports = () => {
   if (!config || !config["db"] || !config["db"]["mysql"]) {
-    console.log(config.db);
-    console.error("db configuration does not found");
+    logger.error(`my-sql-provider - db configuration does not found, ${config.db}`);
     throw "db configuration does not found"
   }
 
@@ -31,14 +30,13 @@ module.exports = () => {
 
   const execute_query = async (query, params) => {
     try {
-      console.log(`executing ${query}`);
+      logger.info(`my-sql-provider/execute_query - parameter query -, ${query}`);
       let results = await pool.query(query, params);
       return Promise.resolve(results[1]);
     } catch (err) {
-      console.error(err);
-
+      logger.error(`my-sql-provider/execute_query - db configuration does not found, ${err}`);
     }
-  }
+  };
 
   const executePromisedQueryConnection = async (connection, query, params) => {
     let is_external_connection = false;
