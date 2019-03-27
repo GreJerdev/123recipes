@@ -24,20 +24,19 @@ async function f() {
     }
 }
 
-f();
 module.exports = class buyListProvider extends db.MongoDBProvider {
-
 
     constructor() {
         super();
+        this.collection_name = 'buy_list';
     }
 
     async create(buy_list, conn) {
         let log_path = 'ingredient_list/create_buy_list -';
         let is_external_connection = true;
         try {
-            this.db_connection = await db.get();
-            let buy_list_collection = this.db_connection.collection('buy_list');
+            this.db_connection = await this.getConnection();
+            let buy_list_collection = this.db_connection.collection(this.collection_name);
             let a = new mongo.Binary(Buffer.from(buy_list.id, 'utf8'));
             buy_list._id = a;
             let result = await buy_list_collection.insertOne(buy_list);
@@ -47,14 +46,14 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
             if (is_external_connection === false) {
                 mysql_provider.rollbackTransaction(conn);
             }
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
         }
     }
 
     async update(buy_list, conn) {
         let log_path = 'ingredient_list/update_buy_list -';
         try {
-            this.db_connection = await db.get();
+            this.db_connection = await this.getConnection();
             await this.db_connection.find({"_id": result._id});
             return Promise.resolve(result);
         } catch (err) {
@@ -65,7 +64,7 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
     async delete(buy_list_id, conn) {
         let log_path = 'ingredient_list/delete_buy_list -';
         try {
-            this.db_connection = await db.get();
+            this.db_connection = await this.getConnection();
             return Promise.resolve(result);
         } catch (err) {
             logger.err(`${log_path} error - ${err}`);
@@ -75,8 +74,8 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
     async getById(buy_list_id, conn) {
         let log_path = 'buy_list/getBuyListById -';
         try {
-            this.db_connection = await db.get();
-            let buy_list_collection = this.db_connection.collection('buy_list');
+            this.db_connection = await this.getConnection();
+            let buy_list_collection = this.db_connection.collection(this.collection_name);
             let id = new mongo.Binary(Buffer.from(buy_list_id, 'utf8'));
             let buy_list = await buy_list_collection.findOne({_id: id});
             return Promise.resolve(buy_list);
@@ -89,13 +88,9 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
     async getList(search_by, order_by, page_number, page_size, limit, connection) {
         let log_path = 'ingredient_list/get_list_buy_list -';
         try {
-            this.db_connection = await db.get();
 
-            let buy_list_collection = this.db_connection.collection('buy_list');
-            buy_list_collection.find().skip(page_number > 0 ? ((page_number - 1) * page_size) : 0).limit(page_size);
-
-
-            return Promise.resolve(result);
+            let buy_lists = await this.getCollectionList(search_by, page_number, page_size);
+            return Promise.resolve(buy_lists);
         } catch (err) {
             logger.err(`${log_path} error - ${err}`);
         }

@@ -3,16 +3,12 @@
 
 const BuyList = require('../models/buy-list-model');
 let buyListDBProvider = require("../providers/buy-list-provider");
-let uuid =  require('uuid').v4;
+let uuid = require('uuid').v4;
 
 module.exports = class BuyListService {
 
     constructor(db_provider = null) {
         this.db_provider = db_provider || new buyListDBProvider();
-    }
-
-    prefix() {
-        return 'bl_';
     }
 
     async createBuyList(buy_list) {
@@ -26,11 +22,11 @@ module.exports = class BuyListService {
             logger.verbose(`${method_name} - calling buyListDBProvider/createBuyList`);
             buy_list = await this.db_provider.createBuyList(buy_list);
             logger.info(`${method_name} - end`);
-            return buy_list;
+            return Promise.resolve(buy_list);
         } catch (err) {
-        logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            return Promise.reject(err);
         }
-
     }
 
     async updateBuyList(buy_list) {
@@ -47,7 +43,7 @@ module.exports = class BuyListService {
         }
     }
 
-    async getById(buy_list_id){
+    async getById(buy_list_id) {
         let method_name = 'BuyListService/getById';
         logger.info(`${method_name} - start`);
         try {
@@ -75,17 +71,19 @@ module.exports = class BuyListService {
         }
     }
 
-    async getListBuyList(search_by, order_by, page_number, page_size, limit) {
+    async getListBuyList(search_by, order_by, page_number, page_size) {
         let method_name = 'BuyListService/createBuyList';
         logger.info(`${method_name} - start`);
         try {
             //logger.verbose(`${method_name} - parameter - buy_list - ${search_by, order_by, page_number, page_size}`);
             logger.verbose(`${method_name} - calling buyListDBProvider/getListOfBuyList`);
             let buy_lists = await this.db_provider.getListOfBuyList(search_by, order_by, page_number, page_size);
+
             logger.info(`${method_name} - end`);
-            return buy_lists;
+            return Promise.resolve(buy_lists);
         } catch (err) {
             logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            return Promise.reject(err);
         }
     }
 

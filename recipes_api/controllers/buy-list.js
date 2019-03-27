@@ -64,13 +64,13 @@ router.get('/', async (req, res) => {
     try {
         console.log("bay-list list get ");
         let buy_list_service = new BuyListService();
-        let search_by = req.params['search'];
-        let order_by = req.params['order'];
-        let page_number = req.params['page_number'];
-        let page_size = req.params['page_size'];
-        let recipe = await buy_list_service.getListBuyList(search_by, order_by, page_number, page_size );
+        let search_by = req.query['search'];
+        let order_by = req.query['order'];
+        let page_number = Number(req.query['page_number']);
+        let page_size = Number(req.query['page_size']);
+        let buy_lists = await buy_list_service.getListBuyList(search_by, order_by, page_number, page_size);
         logger.info(`${method_name} - end`);
-        res.done(recipe);
+        res.done(buy_lists);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
         res.error(err);
@@ -100,7 +100,7 @@ router.post('/:buy_list_id/items', async (req, res) => {
         let buy_list_service = new BuyListService();
         let recipe_id = req.params['recipe_id'];
         logger.info(recipe_id);
-     //   let recipe = await buy_list_service.(recipe_id);
+        //   let recipe = await buy_list_service.(recipe_id);
         res.done(recipe);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);

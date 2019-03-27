@@ -22,7 +22,7 @@ module.exports = class buyListProvider {
             if (is_external_connection === false) {
 
             }
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
         }
     }
 
