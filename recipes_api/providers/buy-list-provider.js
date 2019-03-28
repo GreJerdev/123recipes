@@ -36,7 +36,7 @@ module.exports = class buyListProvider {
             let result = await this.db_connection.update(buy_list);
             return Promise.resolve(result);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
         }
     }
 
@@ -50,7 +50,7 @@ module.exports = class buyListProvider {
             let result = await this.db_connection.delete(id);
             return Promise.resolve(result);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
             return Promise.reject(err);
         }
     }
@@ -65,11 +65,11 @@ module.exports = class buyListProvider {
                 let buy_list = BuyList(result);
                 return Promise.resolve(buy_list);
             } else {
-                logger.err(`${log_path} error - ${buy_list_id} not found`);
+                logger.error(`${log_path} error - ${buy_list_id} not found`);
                 return Promise.reject(ERROR.ERROR_BUY_LIST_NOT_FOUND);
             }
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
             return Promise.reject(err);
         }
     }
@@ -80,7 +80,7 @@ module.exports = class buyListProvider {
             let result = await this.db_connection.getList(search_by, order_by, page_number, page_size, limit, conn);
             return Promise.resolve(result);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
         }
     }
 

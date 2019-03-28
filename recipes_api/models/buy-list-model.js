@@ -20,5 +20,20 @@ module.exports = class BuyList {
             this.is_deleted = buy_list.is_deleted || false;
         }
     }
+
+    static parse(buy_list){
+        return new BuyList(buy_list);
+    }
+
+    static parseList(buy_lists){
+        let log_path = `BuyList/parseList`;
+        try{
+            return buy_lists.map(item=>BuyList.parse(item));
+        }catch (err) {
+            logger.err(`${log_path} error - ${err}`);
+            throw err;
+        }
+    }
+
 }
 ;

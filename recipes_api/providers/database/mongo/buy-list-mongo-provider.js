@@ -4,26 +4,6 @@ let db = require('../mongodb_provider');
 let mongo = require('mongodb');
 let BuyList = require("../../../models/buy-list-model");
 
-async function f() {
-    try {
-        let d = await db.get();
-        let buylist = d.collection('buy_list');
-        let dfg = new BuyList();
-
-        buylist.find({"name": "name"})
-
-        dfg.name = "weekend products";
-        dfg.description = "";
-        dfg.parent = null;
-        dfg.create_at = Date.now();
-
-        let result = await buylist.insertOne(dfg);
-        //console.log(result);
-    } catch (err) {
-        console.log(` error ${err}`);
-    }
-}
-
 module.exports = class buyListProvider extends db.MongoDBProvider {
 
     constructor() {
@@ -32,15 +12,18 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
     }
 
     async create(buy_list, conn) {
-        let log_path = 'ingredient_list/create_buy_list -';
+        let log_path = 'ingredient_list/create';
+        logger.info(`${log_path} - start`);
         let is_external_connection = true;
         try {
+            logger.verbose(`${log_path} - parameters - buy_list - ${buy_list}`);
             this.db_connection = await this.getConnection();
             let buy_list_collection = this.db_connection.collection(this.collection_name);
             let a = new mongo.Binary(Buffer.from(buy_list.id, 'utf8'));
             buy_list._id = a;
             let result = await buy_list_collection.insertOne(buy_list);
             let item = await this.getById(result.insertedId.toString());
+            logger.info(`${log_path} - end`);
             return Promise.resolve(item);
         } catch (err) {
             if (is_external_connection === false) {
@@ -51,48 +34,67 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
     }
 
     async update(buy_list, conn) {
-        let log_path = 'ingredient_list/update_buy_list -';
+        let log_path = 'ingredient_list/update';
+        logger.info(`${log_path} - start`);
         try {
+            logger.verbose(`${log_path} - parameters - buy_list - ${buy_list}`);
             this.db_connection = await this.getConnection();
             await this.db_connection.find({"_id": result._id});
+            logger.info(`${log_path} - end`);
             return Promise.resolve(result);
         } catch (err) {
             logger.err(`${log_path} error - ${err}`);
         }
     }
 
-    async delete(buy_list_id, conn) {
-        let log_path = 'ingredient_list/delete_buy_list -';
+    async delete(id, conn) {
+        let log_path = 'ingredient_list/delete';
+        logger.info(`${log_path} - start`);
         try {
+            logger.verbose(`${log_path} - parameters - buy_list_id - ${id}`);
+            let mongo_id = new mongo.Binary(Buffer.from(id, 'utf8'));
             this.db_connection = await this.getConnection();
+            logger.info(`${log_path} - end`);
             return Promise.resolve(result);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
         }
     }
 
-    async getById(buy_list_id, conn) {
-        let log_path = 'buy_list/getBuyListById -';
+    async getById(id, conn) {
+        let log_path = 'buy_list/getById';
+        logger.info(`${log_path} - start`);
         try {
+            logger.verbose(`${log_path} - parameters - buy_list_id - ${id}`);
             this.db_connection = await this.getConnection();
             let buy_list_collection = this.db_connection.collection(this.collection_name);
-            let id = new mongo.Binary(Buffer.from(buy_list_id, 'utf8'));
-            let buy_list = await buy_list_collection.findOne({_id: id});
+            let mongo_id = new mongo.Binary(Buffer.from(id, 'utf8'));
+            let buy_list = await buy_list_collection.findOne({_id: mongo_id});
+            logger.info(`${log_path} - end`);
             return Promise.resolve(buy_list);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
             return Promise.reject(err);
         }
     }
 
-    async getList(search_by, order_by, page_number, page_size, limit, connection) {
-        let log_path = 'ingredient_list/get_list_buy_list -';
+    async getList(search_by, order_by, page_number, page_size, connection) {
+        let log_path = 'ingredient_list/getList';
+        logger.info(`${log_path} - start`);
         try {
-
-            let buy_lists = await this.getCollectionList(search_by, page_number, page_size);
+            search_by = search_by || '';
+            logger.verbose(`${log_path} - parameters - search_by - ${search_by}, order_by - ${order_by}, page_number - ${page_number}, page_size - ${page_size}`);
+            let filter = {
+                "$or": [
+                    {"name":{ "$regex": search_by, "$options": "i" } },
+                    {"description":  { "$regex": search_by, "$options": "i" } }
+                ]
+            };
+            let buy_lists = await this.getCollectionList(filter, order_by, page_number, page_size);
+            logger.info(`${log_path} - end`);
             return Promise.resolve(buy_lists);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
         }
     }
 

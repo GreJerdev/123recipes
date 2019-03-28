@@ -50,19 +50,20 @@ exports.MongoDBProvider = class MongoDBProvider {
                 state.mode = null;
                 this.db_connection = null;
             }
-            return Promise.resolve()
+            return Promise.resolve();
         } catch (err) {
             return Promise.reject(err)
         }
     };
 
-    async getCollectionList(filter, page_number = 0, page_size = 10, collection_name = null, conn = null) {
+    async getCollectionList(filter, order, page_number = 0, page_size = 10, collection_name = null, conn = null) {
         let log_path = 'MongoDBProvider/getCollectionList';
         let is_external_connection = true;
         try {
             this.db_connection = await this.getConnection();
             let buy_list_collection = this.db_connection.collection(collection_name || this.collection_name);
-            let items = await buy_list_collection.find({}).skip(page_number > 0 ? ((page_number - 1) * page_size) : 0).limit(page_size).toArray();
+            order = order || {'create_at': 1};
+            let items = await buy_list_collection.find(filter || {}).sort(order).skip(page_number > 0 ? ((page_number - 1) * page_size) : 0).limit(page_size).toArray();
             logger.verbose(`${log_path} - result items  - ${items}`);
             return Promise.resolve(items);
         } catch (err) {

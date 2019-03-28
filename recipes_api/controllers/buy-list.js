@@ -70,7 +70,7 @@ router.get('/', async (req, res) => {
         let page_size = Number(req.query['page_size']);
         let buy_lists = await buy_list_service.getListBuyList(search_by, order_by, page_number, page_size);
         logger.info(`${method_name} - end`);
-        res.done(buy_lists);
+        res.done(BayList.parseList(buy_lists));
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
         res.error(err);
@@ -84,9 +84,9 @@ router.delete('/:buy_list_id', async (req, res) => {
         console.log("recipe get ");
         let buy_list_service = new BuyListService();
         let buy_list_id = req.params['buy_list_id'];
-        console.log(buy_list_id)
+        console.log(buy_list_id);
         let recipe = await buy_list_service.deleteBuyList(buy_list_id);
-        res.done(recipe);
+        res.done(BuyList.parseList(recipe));
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
         res.error(err);
