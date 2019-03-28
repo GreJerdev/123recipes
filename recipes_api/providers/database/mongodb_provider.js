@@ -71,8 +71,31 @@ exports.MongoDBProvider = class MongoDBProvider {
                 mysql_provider.rollbackTransaction(conn);
             }
             logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
+
+    async deleteFromCollection(id, conn = null) {
+        let log_path = 'MongoDBProvider/deleteFromCollection';
+        let is_external_connection = true;
+        try {
+            conn = conn || await this.getConnection();
+            let buy_list_collection = conn.collection(collection_name || this.collection_name);
+            let mongo_id = new mongo.Binary(Buffer.from(id, 'utf8'));
+            let new_value = {$set: {is_deleted: true}};
+            let my_query = {_id: mongo_id};
+            let result = await buy_list_collection.updateOne(my_query, new_value);
+            logger.verbose(`${log_path} - result items - ${result}`);
+            return Promise.resolve(true);
+        } catch (err) {
+            if (is_external_connection === false) {
+                mysql_provider.rollbackTransaction(conn);
+            }
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
+        }
+    }
+
 };
 
 

@@ -40,14 +40,14 @@ module.exports = class buyListProvider {
         }
     }
 
-    async deleteBuyList(id, conn) {
+    async deleteBuyList(id, conn = null) {
         let log_path = 'buy-list-provider/delete_buy_list -';
         let is_external_connection = false;
         try {
             if (!conn) {
 
             }
-            let result = await this.db_connection.delete(id);
+            let result = await this.db_connection.delete(id, conn);
             return Promise.resolve(result);
         } catch (err) {
             logger.error(`${log_path} error - ${err}`);

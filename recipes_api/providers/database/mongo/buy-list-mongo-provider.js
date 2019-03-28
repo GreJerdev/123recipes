@@ -52,8 +52,9 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         logger.info(`${log_path} - start`);
         try {
             logger.verbose(`${log_path} - parameters - buy_list_id - ${id}`);
-            let mongo_id = new mongo.Binary(Buffer.from(id, 'utf8'));
             this.db_connection = await this.getConnection();
+            var newvalues = { $set: {is_deleted: false } };
+            let buy_lists = await this.deleteFromCollection(id,  this.db_connection);
             logger.info(`${log_path} - end`);
             return Promise.resolve(result);
         } catch (err) {

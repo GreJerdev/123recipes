@@ -81,12 +81,10 @@ router.delete('/:buy_list_id', async (req, res) => {
     const method_name = 'buy-list/delete';
     logger.info(`${method_name} - start`);
     try {
-        console.log("recipe get ");
         let buy_list_service = new BuyListService();
         let buy_list_id = req.params['buy_list_id'];
-        console.log(buy_list_id);
-        let recipe = await buy_list_service.deleteBuyList(buy_list_id);
-        res.done(BuyList.parseList(recipe));
+        await buy_list_service.deleteBuyList(buy_list_id);
+        res.done(true);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
         res.error(err);
