@@ -39,7 +39,7 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         logger.info(`${log_path} - start`);
         try {
             logger.verbose(`${log_path} - parameters - buy_list - ${buy_list}`);
-            let update_results = db.MongoDBProvider.prototype.updateOne.call(this, buy_list, BuyList, null, conn);
+            let update_results = await db.MongoDBProvider.prototype.updateOne.call(this, buy_list, BuyList, null, conn);
             logger.info(`${log_path} - end`);
             return Promise.resolve(update_results);
         } catch (err) {
@@ -69,7 +69,7 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         logger.info(`${log_path} - start`);
         try {
             logger.verbose(`${log_path} - parameters - buy_list_id - ${id}`);
-            let buy_list = db.MongoDBProvider.prototype.getById.call(this, id, conn);
+            let buy_list = await db.MongoDBProvider.prototype.getById.call(this, id, conn);
             logger.info(`${log_path} - end`);
             return Promise.resolve(buy_list);
         } catch (err) {

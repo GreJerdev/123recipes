@@ -23,6 +23,7 @@ module.exports = class buyListProvider {
 
             }
             logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
 
@@ -33,10 +34,11 @@ module.exports = class buyListProvider {
             if (!conn) {
 
             }
-            let result = await this.db_connection.update(buy_list);
-            return Promise.resolve(result);
+            let result = await this.db_connection.update(buy_list, conn);
+            return Promise.resolve(new BuyList(result));
         } catch (err) {
             logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
 
@@ -84,7 +86,6 @@ module.exports = class buyListProvider {
             return Promise.reject(err);
         }
     }
-
-}
+};
 
 

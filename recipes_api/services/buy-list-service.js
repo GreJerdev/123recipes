@@ -37,7 +37,7 @@ module.exports = class BuyListService {
             logger.verbose(`${method_name} - calling buyListDBProvider/createBuyList`);
             let buy_list_updated = await this.db_provider.updateBuyList(buy_list);
             logger.info(`${method_name} - end`);
-            return Promise.reject(buy_list_updated);
+            return Promise.resolve(buy_list_updated);
         } catch (err) {
             logger.error(`${method_name} - error Fails to create buy_list ${err}`);
             return Promise.reject(err);
