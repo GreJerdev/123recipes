@@ -53,8 +53,8 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
         try {
             logger.verbose(`${log_path} - parameters - buy_list_id - ${id}`);
             this.db_connection = await this.getConnection();
-            var newvalues = { $set: {is_deleted: false } };
-            let buy_lists = await this.deleteFromCollection(id,  this.db_connection);
+            var newvalues = {$set: {is_deleted: false}};
+            let buy_lists = await this.deleteFromCollection(id, this.db_connection);
             logger.info(`${log_path} - end`);
             return Promise.resolve(result);
         } catch (err) {
@@ -70,7 +70,12 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
             this.db_connection = await this.getConnection();
             let buy_list_collection = this.db_connection.collection(this.collection_name);
             let mongo_id = new mongo.Binary(Buffer.from(id, 'utf8'));
-            let buy_list = await buy_list_collection.findOne({_id: mongo_id});
+            let buy_list = await buy_list_collection.findOne({
+                $and: [
+                    {_id: mongo_id},
+                    {"is_deleted": false}
+                ]
+            });
             logger.info(`${log_path} - end`);
             return Promise.resolve(buy_list);
         } catch (err) {
@@ -86,10 +91,14 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
             search_by = search_by || '';
             logger.verbose(`${log_path} - parameters - search_by - ${search_by}, order_by - ${order_by}, page_number - ${page_number}, page_size - ${page_size}`);
             let filter = {
-                "$or": [
-                    {"name":{ "$regex": search_by, "$options": "i" } },
-                    {"description":  { "$regex": search_by, "$options": "i" } }
-                ]
+                "$and": [
+                    {"is_deleted": false},
+                    {
+                        "$or": [
+                            {"name": {"$regex": search_by, "$options": "i"}},
+                            {"description": {"$regex": search_by, "$options": "i"}}
+                        ]
+                    }]
             };
             let buy_lists = await this.getCollectionList(filter, order_by, page_number, page_size);
             logger.info(`${log_path} - end`);

@@ -6,8 +6,8 @@ const BuyListService = require('../services/buy-list-service');
 const BayList = require('../models/buy-list-model');
 
 router.post('/', async (req, res) => {
+    const method_name = 'buy-list/create';
     try {
-        const method_name = 'buy-list/create';
         logger.info(`${method_name} - start`);
         let buy_list_service = new BuyListService();
         let buy_list = new BayList();
@@ -21,24 +21,24 @@ router.post('/', async (req, res) => {
         res.done(bay_list);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
-        res.error(err);
+        return res.error(err);
     }
 });
 
 router.get('/:bay_list_id', async (req, res) => {
+    const method_name = 'buy-list/getById';
     try {
-        const method_name = 'buy-list/getById';
         logger.info(`${method_name} - start`);
         let buy_list_service = new BuyListService();
-        let recipe_id = req.params['recipe_id'];
-        logger.info(recipe_id);
-        let recipe = await buy_list_service.getById(recipe_id);
+        let id = req.params['bay_list_id'];
+        logger.info(id);
+        let recipe = await buy_list_service.getById(id);
         logger.info(`${method_name} - end`);
 
         res.done(recipe);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
-        res.error(err);
+        return res.error(err);
     }
 });
 
@@ -54,7 +54,7 @@ router.post('/:bay_list_id', async (req, res) => {
         res.done(recipe);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
-        res.error(err);
+        return res.error(err);
     }
 });
 
@@ -73,7 +73,7 @@ router.get('/', async (req, res) => {
         res.done(BayList.parseList(buy_lists));
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
-        res.error(err);
+        return res.error(err);
     }
 });
 
@@ -87,12 +87,13 @@ router.delete('/:buy_list_id', async (req, res) => {
         res.done(true);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
-        res.error(err);
+        return res.error(err);
     }
 });
 
 
 router.post('/:buy_list_id/items', async (req, res) => {
+    const method_name = 'buy-list/buy_list_id/items';
     try {
         logger.info("recipe get ");
         let buy_list_service = new BuyListService();
@@ -102,7 +103,7 @@ router.post('/:buy_list_id/items', async (req, res) => {
         res.done(recipe);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
-        res.error(err);
+        return res.error(err);
     }
 });
 

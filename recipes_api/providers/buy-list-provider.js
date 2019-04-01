@@ -61,8 +61,8 @@ module.exports = class buyListProvider {
 
         try {
             let result = await this.db_connection.getById(buy_list_id);
-            if (resilt) {
-                let buy_list = BuyList(result);
+            if (result) {
+                let buy_list = new BuyList(result);
                 return Promise.resolve(buy_list);
             } else {
                 logger.error(`${log_path} error - ${buy_list_id} not found`);
@@ -81,6 +81,7 @@ module.exports = class buyListProvider {
             return Promise.resolve(result);
         } catch (err) {
             logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
 

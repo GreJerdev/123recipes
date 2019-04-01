@@ -40,6 +40,7 @@ module.exports = class BuyListService {
             return buy_list;
         } catch (err) {
             logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            return Promise.reject(err);
         }
     }
 
@@ -54,6 +55,7 @@ module.exports = class BuyListService {
             return buy_list;
         } catch (err) {
             logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            return Promise.reject(err);
         }
     }
 
@@ -68,6 +70,7 @@ module.exports = class BuyListService {
             return buy_list;
         } catch (err) {
             logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            return Promise.reject(err);
         }
     }
 
