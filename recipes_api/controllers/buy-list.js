@@ -46,12 +46,13 @@ router.post('/:bay_list_id', async (req, res) => {
     const method_name = 'buy-list/update';
     logger.info(`${method_name} - start`);
     try {
-        console.log("bay-list update");
+        let id = req.params['bay_list_id'];
         let buy_list_service = new BuyListService();
         logger.verbose(`${method_name} - request body req.body`);
-        let recipe = await buy_list_service.updateBuyList(req.body);
+        let values = {... req.body, ...{"id": id}};
+        let bay_list = await buy_list_service.updateBuyList(values);
         logger.info(`${method_name} - end`);
-        res.done(recipe);
+        res.done(bay_list);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
         return res.error(err);

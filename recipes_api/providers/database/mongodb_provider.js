@@ -1,6 +1,6 @@
 let configuration = require('../../configuration/config');
-
-var MongoClient = require('mongodb').MongoClient;
+let mongo = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 
 const state = {
     db: null,
@@ -75,7 +75,30 @@ exports.MongoDBProvider = class MongoDBProvider {
         }
     }
 
-    async deleteFromCollection(id, conn = null) {
+    async getById(id, collection_name = null, conn = null) {
+        let log_path = 'MongoDBProvider/getById';
+        logger.info(`${log_path} - start`);
+        try {
+            logger.verbose(`${log_path} - parameters - buy_list_id - ${id}`);
+            this.db_connection = await this.getConnection();
+            let buy_list_collection = this.db_connection.collection(this.collection_name);
+            let mongo_id = this.uuid2MongoId(id);
+            let object = await buy_list_collection.findOne({
+                $and: [
+                    {_id: mongo_id},
+                    {"is_deleted": false}
+                ]
+            });
+            logger.info(`${log_path} - end`);
+            return Promise.resolve(object);
+        } catch (err) {
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
+        }
+    }
+
+
+    async deleteFromCollection(id, collection_name = null, conn = null) {
         let log_path = 'MongoDBProvider/deleteFromCollection';
         let is_external_connection = true;
         try {
@@ -93,6 +116,68 @@ exports.MongoDBProvider = class MongoDBProvider {
             }
             logger.error(`${log_path} error - ${err}`);
             return Promise.reject(err);
+        }
+    }
+
+    async updateOne(update_data, model, collection_name = null, conn = null) {
+        let log_path = 'MongoDBProvider/updateOne';
+        let is_external_connection = true;
+        try {
+            conn = conn || await this.getConnection();
+            let collection = conn.collection(collection_name || this.collection_name);
+            let mongo_id = this.uuid2MongoId(update_data.id);
+            update_data = this.cleanDataBeforeUpdate(update_data, model);
+            let update_values = {$set: update_data};
+            let update_query = {
+                $and: [
+                    {_id: mongo_id},
+                    {"is_deleted": false}
+                ]
+            };
+            let result = await collection.updateOne(update_query, update_values);
+            result = await this.getById(update_data.id, conn);
+            logger.verbose(`${log_path} - result items - ${result}`);
+            return Promise.resolve(result);
+        } catch (err) {
+            if (is_external_connection === false) {
+                mysql_provider.rollbackTransaction(conn);
+            }
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
+        }
+    }
+
+
+    cleanDataBeforeUpdate(update_data, model) {
+        let log_path = 'MongoDBProvider/cleanDataBeforeUpdate';
+        logger.info(`${log_path} - start`);
+        try {
+            let input_keys = Object.keys(update_data);
+            let model_keys = Object.keys(new model());
+            input_keys.map((field) => {
+                if (model_keys.indexOf(field) == -1) {
+                    delete update_data[field]
+                }
+            });
+            update_data["is_deleted"];
+            update_data["create_at"];
+            logger.info(`${log_path} - end`);
+            return update_data;
+        } catch (err) {
+            logger.error(`${log_path} error - ${err}`);
+            throw err;
+        }
+    }
+
+    uuid2MongoId(object_id) {
+        let log_path = 'MongoDBProvider/uuid2MongoId';
+        logger.info(`${log_path} - start`);
+        try {
+            logger.info(`${log_path} - end`);
+            return new mongo.Binary(Buffer.from(object_id, 'utf8'));
+        } catch (err) {
+            logger.error(`${log_path} error - ${err}`);
+            throw err;
         }
     }
 
