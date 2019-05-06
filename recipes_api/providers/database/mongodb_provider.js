@@ -134,7 +134,9 @@ exports.MongoDBProvider = class MongoDBProvider {
                     {"is_deleted": false}
                 ]
             };
+            logger.silly(`${log_path} - calling collection.updateOne`);
             let result = await collection.updateOne(update_query, update_values);
+            logger.verbose(`${log_path} - update one result - ${result}`);
             result = await this.getById(update_data.id, conn);
             logger.verbose(`${log_path} - result items - ${result}`);
             return Promise.resolve(result);
