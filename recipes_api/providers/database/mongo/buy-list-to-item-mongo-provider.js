@@ -1,7 +1,7 @@
 "use strict";
 
 let db = require('../mongodb_provider');
-let BuyListItem = require("../../../models/buy-list-to-item-model");
+let BuyListItem = require("../../../models/buy-list-item-model");
 
 module.exports = class buyListItemsProvider {
   constructor() { }
