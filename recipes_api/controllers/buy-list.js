@@ -5,11 +5,12 @@ const router = express.Router();
 const BuyListService = require('../services/buy-list-service');
 const BayList = require('../models/buy-list-model');
 
+const buy_list_service =  new BuyListService();
+
 router.post('/', async (req, res) => {
     const method_name = 'buy-list/create';
     try {
         logger.info(`${method_name} - start`);
-        let buy_list_service = new BuyListService();
         let buy_list = new BayList();
         buy_list.name = req.body.name;
         buy_list.description = req.body.description;
@@ -29,7 +30,7 @@ router.get('/:bay_list_id', async (req, res) => {
     const method_name = 'buy-list/getById';
     try {
         logger.info(`${method_name} - start`);
-        let buy_list_service = new BuyListService();
+
         let id = req.params['bay_list_id'];
         logger.info(id);
         let recipe = await buy_list_service.getById(id);
@@ -47,7 +48,7 @@ router.post('/:bay_list_id', async (req, res) => {
     logger.info(`${method_name} - start`);
     try {
         let id = req.params['bay_list_id'];
-        let buy_list_service = new BuyListService();
+
         logger.verbose(`${method_name} - request body req.body`);
         let values = {... req.body, ...{"id": id}};
         let bay_list = await buy_list_service.updateBuyList(values);
@@ -64,7 +65,7 @@ router.get('/', async (req, res) => {
     logger.info(`${method_name} - start`);
     try {
         console.log("bay-list list get ");
-        let buy_list_service = new BuyListService();
+
         let search_by = req.query['search'];
         let order_by = req.query['order'];
         let page_number = Number(req.query['page_number']);
@@ -82,7 +83,7 @@ router.delete('/:buy_list_id', async (req, res) => {
     const method_name = 'buy-list/delete';
     logger.info(`${method_name} - start`);
     try {
-        let buy_list_service = new BuyListService();
+
         let buy_list_id = req.params['buy_list_id'];
         await buy_list_service.deleteBuyList(buy_list_id);
         res.done(true);
@@ -97,16 +98,31 @@ router.post('/:buy_list_id/items', async (req, res) => {
     const method_name = 'buy-list/buy_list_id/items';
     try {
         logger.info("recipe get ");
-        let buy_list_service = new BuyListService();
+
         let recipe_id = req.params['recipe_id'];
         logger.info(recipe_id);
-        //   let recipe = await buy_list_service.(recipe_id);
-        res.done(recipe);
+        const items = req.body;
+        let buy_list = await buy_list_service.addItems(buy_list_id,items);
+        res.done(buy_list);
     } catch (err) {
         logger.error(`${method_name} - error - ${err}`);
         return res.error(err);
     }
 });
 
+router.post('/:buy_list_id/item', async (req, res) => {
+    const method_name = 'buy-list/buy_list_id/items';
+    try {
+        logger.info("recipe get ");
 
+        let buy_list_id = req.params['buy_list_id'];
+        logger.info(recipe_id);
+        const item = req.body;
+        let buy_list = await buy_list_service.addItems(buy_list_id,[item]);
+        res.done(buy_list);
+    } catch (err) {
+        logger.error(`${method_name} - error - ${err}`);
+        return res.error(err);
+    }
+});
 module.exports = router;

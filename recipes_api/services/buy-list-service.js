@@ -90,6 +90,19 @@ module.exports = class BuyListService {
         }
     }
 
+    async addItems(buy_list_id, items){
+        let method_name = 'BuyListService/createBuyList';
+        logger.info(`${method_name} - start`);
+        try{
+            logger.verbose(`${method_name} - calling buyListDBProvider/getListOfBuyList`);
+            logger.info(`${method_name} - end`);
+            return Promise.resolve(null);
+        }catch(err){
+            logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            return Promise.reject(err);
+        }
+    }
+
 };
 
 
