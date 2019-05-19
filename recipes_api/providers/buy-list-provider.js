@@ -86,6 +86,22 @@ module.exports = class buyListProvider {
             return Promise.reject(err);
         }
     }
+
+    async additems(buy_list_id,list_items ,conn = null) {
+        let log_path = 'buy-list-provider/delete_buy_list -';
+        let is_external_connection = false;
+        try {
+            if (!conn) {
+
+            }
+            let result = await this.db_connection.additems(buy_list_id,list_items, conn);
+            return Promise.resolve(result);
+        } catch (err) {
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
+        }
+    }
+
 };
 
 

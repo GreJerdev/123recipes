@@ -90,18 +90,50 @@ module.exports = class BuyListService {
         }
     }
 
-    async addItems(buy_list_id, items){
-        let method_name = 'BuyListService/createBuyList';
+    async addItems(buy_list_id, items) {
+        let method_name = 'BuyListService/addItems';
         logger.info(`${method_name} - start`);
-        try{
-            logger.verbose(`${method_name} - calling buyListDBProvider/getListOfBuyList`);
+        try {
+            logger.verbose(`${method_name} - calling BuyListItem/parseListFromInput`);
+            let list_items = BuyListItem.parseListFromInput(items);
+            logger.verbose(`${method_name} - calling BuyListService/isBuyListExist`);
+            let buy_list = this.getById(buy_list_id);
+            let error = this.validateItems(list_items);
+            if (!buy_list || error) {
+                error = !buy_list ? ERROR.ERROR_BUY_LIST_NOT_FOUND : error;
+                logger.error(`${method_name} - error ${error}`);
+            }
+            list_items.map(item => {
+                item.id = uuid();
+                item.buy_list_id = buy_list_id;
+                item.create_at = new Date().getTime();
+                item.is_deleted = 0;
+            });
+
+            logger.verbose(`${method_name} - calling buyListDBProvider/addItems`);
+            buy_list = await this.db_provider.addItems(buy_list_id, list_items);
             logger.info(`${method_name} - end`);
-            return Promise.resolve(null);
-        }catch(err){
+            return Promise.resolve(buy_list);
+        } catch (err) {
             logger.error(`${method_name} - error Fails to create buy_list ${err}`);
             return Promise.reject(err);
         }
     }
+
+
+    async validateItems(list_items) {
+        let method_name = 'BuyListService/validateItems';
+        logger.info(`${method_name} - start`);
+        try {
+            let error = null;
+            logger.info(`${method_name} - end ${error}`);
+            return Promise.resolve(null);
+        } catch (err) {
+            logger.error(`${method_name} - error Fails to create buy_list ${err}`);
+            return Promise.reject(err);
+        }
+    }
+
 
 };
 

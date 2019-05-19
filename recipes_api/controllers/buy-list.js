@@ -113,7 +113,7 @@ router.post('/:buy_list_id/items', async (req, res) => {
 router.post('/:buy_list_id/item', async (req, res) => {
     const method_name = 'buy-list/buy_list_id/items';
     try {
-        logger.info("recipe get ");
+        logger.info(`${method_name} - items - ${items}`);
 
         let buy_list_id = req.params['buy_list_id'];
         logger.info(recipe_id);

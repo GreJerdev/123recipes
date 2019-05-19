@@ -19,15 +19,13 @@ module.exports = class buyListProvider extends db.MongoDBProvider {
             logger.verbose(`${log_path} - parameters - buy_list - ${buy_list}`);
             this.db_connection = await this.getConnection();
             let buy_list_collection = this.db_connection.collection(this.collection_name);
-            let a = new mongo.Binary(Buffer.from(buy_list.id, 'utf8'));
-            buy_list._id = a;
+            buy_list._id = this.uuid2MongoId(buy_list.id);
             let result = await buy_list_collection.insertOne(buy_list);
             let item = await this.getById(result.insertedId.toString());
             logger.info(`${log_path} - end`);
             return Promise.resolve(item);
         } catch (err) {
             if (is_external_connection === false) {
-                mysql_provider.rollbackTransaction(conn);
             }
             logger.error(`${log_path} error - ${err}`);
             return Promise.reject(err);

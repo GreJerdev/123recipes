@@ -36,16 +36,29 @@ module.exports = class BuyListItem{
     }
 
     static parse(item){
+        let log_path = `BuyListItem/parse`;
+        logger.info(`${log_path} start/end`);
+        logger.verbose(`${log_path} item to parse ${item}`);
         return new BuyListItem(item);
     }
 
     static parseList(item_list){
-        let log_path = `BuyList/parseList`;
+        let log_path = `BuyListItem/parseList`;
         try{
             return item_list.map(item=>BuyListItem.parse(item));
         }catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
             throw err;
+        }
+    }
+
+    static parseListFromInput(items){
+        let log_path = `BuyListItem/parseListFromInput`;
+        logger.info(`${log_path} start/end`);
+        if(Array.isArray(items)){
+            return BuyListItem.parseList(items);
+        }else{
+            return BuyListItem.parse(items);
         }
     }
 };
