@@ -191,5 +191,5 @@ exports.MongoDBProvider = class MongoDBProvider {
 
 };
 
-});
+
 
