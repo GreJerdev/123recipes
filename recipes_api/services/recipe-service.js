@@ -3,7 +3,7 @@
 const recipe_model = require('../models/recipe-model');
 const recipe_db_provider = require('../providers/recipe-provider');
 const ingredient_service = require('./ingredient-service');
-const error = require('../utilities/errors').error;
+const error = require('../utilities/errors');
 const uuid = require('uuid');
 
 
@@ -69,7 +69,7 @@ module.exports = class RecipeService {
             console.log("update_recipe - start")
             let update_recipe = new recipe_model(recipe)
             await this.recipe_db_provider.updateRecipe(update_recipe);
-            recipe = await this.getRecipeById(update_recipe.id)
+            let recipe = await this.getRecipeById(update_recipe.id)
             console.log("update_recipe - end")
             return Promise.resolve(recipe);
         } catch (err) {
@@ -112,7 +112,7 @@ module.exports = class RecipeService {
                 return Promise.reject(error.INVALID_INGREDIENT);
             }
             const recipe = await this.recipe_db_provider.getRecipeById(recipe_id);
-            console.log(`${arguments.callee.name} - end`)
+            console.log(`${arguments.caller.name} - end`)
             return Promise.resolve(recipe);
         } catch (err) {
             console.log(`${arguments.callee.name} - error, ${err}`);

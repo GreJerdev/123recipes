@@ -1,3 +1,10 @@
+let configuration = require('../../configuration/config');
+let mongo = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
+
+const state = {
+    db: null,
+};
 //const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const ObjectId = require('mongodb').ObjectId;
@@ -5,113 +12,184 @@ const config = require("../../configuration/config");
 
 import {MongoClient} from 'mongodb';
 
-class MongoDBProvider {
-    constructor(collection_name) {
-        if (!collection_name) {
-            throw 'MongoDB collection name is empty'
-        }
-        this.collection_name = collection_name;
+
+exports.MongoDBProvider = class MongoDBProvider {
+
+    constructor() {
+        this.getConnection().then((connection) => {
+            this.db_connection = connection;
+            logger.info(`mongodb_provider/constructor - db_connection is set`);
+        }).catch((err) => {
+            logger.info(`mongodb_provider/constructor - connection error - ${err}`);
+        });
+        this.collection_name = '';
     }
 
-    static __connection = null;
-    static class_name = "MongoDBProvider";
-
-    static async initConnection() {
-        const option = {
-            db: {
-                numberOfRetries: 5
-            },
-            server: {
-                auto_reconnect: true,
-                poolSize: 40,
-                socketOptions: {
-                    connectTimeoutMS: 500
-                }
-            },
-            replSet: {},
-            mongos: {}
-        };
-        let url = config["db"]["mongodb"]["connection_string"];
-        let connection = await MongoClient.connect(url, option);
-        return connection;
-    }
-
-    static async getConnecton() {
+    async connect() {
         try {
-            if (!MongoDBProvider.__connection) {
-                MongoDBProvider.__connection = await MongoDBProvider.initConnection()
+            if (!state.db) {
+                const url = configuration.db.mongodb.connection_string;
+                let client = await MongoClient.connect(url);
+                state.db = client.db(configuration.db.mongodb.data_base);
+                logger.info(`mongodb_provider/connect - connected to db - url - ${url}`);
             }
-            return await MongoDBProvider.__connection
-
-        } catch (e) {
-            throw e
+            return Promise.resolve()
+        } catch (err) {
+            logger.error(`mongodb_provider/connect - parameter query -, ${err}`);
+            return Promise.reject(err);
         }
+    };
 
-    }
+    async getConnection() {
+        if (!state.db) {
+            await this.connect();
+        }
+        logger.silly(`mongodb_provider/getConnection - is state.db null ? - ${state.db === null}`);
+        return state.db;
+    };
 
+    async close() {
+        try {
+            if (state.db) {
+                await state.db.close();
+                state.db = null;
+                state.mode = null;
+                this.db_connection = null;
+            }
+            return Promise.resolve();
+        } catch (err) {
+            return Promise.reject(err)
+        }
+    };
 
-    async create(item, conn) {
-        let log_path = `${BuyListMongo.class_name}/create -`;
+    async getCollectionList(filter, order, page_number = 0, page_size = 10, collection_name = null, conn = null) {
+        let log_path = 'MongoDBProvider/getCollectionList';
         let is_external_connection = true;
-        let result = null;
         try {
-            result = await MongoDBProvider.getConnecton().collection(this.collection_name).insertOne(item)
+            this.db_connection = await this.getConnection();
+            let buy_list_collection = this.db_connection.collection(collection_name || this.collection_name);
+            order = order || {'create_at': 1};
+            let items = await buy_list_collection.find(filter || {}).sort(order).skip(page_number > 0 ? ((page_number - 1) * page_size) : 0).limit(page_size).toArray();
+            logger.verbose(`${log_path} - result items  - ${items}`);
+            return Promise.resolve(items);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
-        }
-        return result;
-    }
-
-    async update(item, conn) {
-        let log_path = `${BuyListMongo.class_name}/update -`;
-        let is_external_connection = false;
-        let result = null;
-        try {
-            result = await MongoDBProvider.getConnecton().collection(this.collection_name).updateOne({"id": item.id}, {$set: item});
-            return result;
-        } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            if (is_external_connection === false) {
+                mysql_provider.rollbackTransaction(conn);
+            }
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
 
-    async delete(id) {
-        let log_path = `${BuyListMongo.class_name}/delete -`;
-        let is_external_connection = false;
-        let result = null;
+    async getById(id, collection_name = null, conn = null) {
+        let log_path = 'MongoDBProvider/getById';
+        logger.info(`${log_path} - start`);
         try {
-            result = await MongoDBProvider.getConnecton().collection(this.collection_name).updateOne({"id": id}, {$set: {"is_deleted": true,}});
-            return result;
+            logger.verbose(`${log_path} - parameters - buy_list_id - ${id}`);
+            this.db_connection = await this.getConnection();
+            let buy_list_collection = this.db_connection.collection(this.collection_name);
+            let mongo_id = this.uuid2MongoId(id);
+            let object = await buy_list_collection.findOne({
+                $and: [
+                    {_id: mongo_id},
+                    {"is_deleted": false}
+                ]
+            });
+            logger.info(`${log_path} - end`);
+            return Promise.resolve(object);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
 
-    async getById(id, conn) {
-        let log_path = `${BuyListMongo.class_name}/getById -`;
-        let result = null;
+
+    async deleteFromCollection(id, collection_name = null, conn = null) {
+        let log_path = 'MongoDBProvider/deleteFromCollection';
+        let is_external_connection = true;
         try {
-            result = await MongoDBProvider.getConnecton().collection(this.collection_name).findOne({"id": id});
-            return result;
+            conn = conn || await this.getConnection();
+            let buy_list_collection = conn.collection(collection_name || this.collection_name);
+            let mongo_id = new mongo.Binary(Buffer.from(id, 'utf8'));
+            let new_value = {$set: {is_deleted: true}};
+            let my_query = {_id: mongo_id};
+            let result = await buy_list_collection.updateOne(my_query, new_value);
+            logger.verbose(`${log_path} - result items - ${result}`);
+            return Promise.resolve(true);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            if (is_external_connection === false) {
+                mysql_provider.rollbackTransaction(conn);
+            }
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
 
-    async getList(search_by, order_by, page_number, page_size, limit) {
-        let log_path = `${BuyListMongo.class_name}/getList -`;
-        let result = null;
+    async updateOne(update_data, model, collection_name = null, conn = null) {
+        let log_path = 'MongoDBProvider/updateOne';
+        let is_external_connection = true;
         try {
-            result = await MongoDBProvider.getConnecton().collection(this.collection_name).updateOne(search_by, {$set: item});
-            return result;
+            conn = conn || await this.getConnection();
+            let collection = conn.collection(collection_name || this.collection_name);
+            let mongo_id = this.uuid2MongoId(update_data.id);
+            update_data = this.cleanDataBeforeUpdate(update_data, model);
+            let update_values = {$set: update_data};
+            let update_query = {
+                $and: [
+                    {_id: mongo_id},
+                    {"is_deleted": false}
+                ]
+            };
+            logger.silly(`${log_path} - calling collection.updateOne`);
+            let result = await collection.updateOne(update_query, update_values);
+            logger.verbose(`${log_path} - update one result - ${result}`);
+            result = await this.getById(update_data.id, conn);
+            logger.verbose(`${log_path} - result items - ${result}`);
+            return Promise.resolve(result);
         } catch (err) {
-            logger.err(`${log_path} error - ${err}`);
+            if (is_external_connection === false) {
+                mysql_provider.rollbackTransaction(conn);
+            }
+            logger.error(`${log_path} error - ${err}`);
+            return Promise.reject(err);
         }
     }
 
-}
 
+    cleanDataBeforeUpdate(update_data, model) {
+        let log_path = 'MongoDBProvider/cleanDataBeforeUpdate';
+        logger.info(`${log_path} - start`);
+        try {
+            let input_keys = Object.keys(update_data);
+            let model_keys = Object.keys(new model());
+            input_keys.map((field) => {
+                if (model_keys.indexOf(field) == -1) {
+                    delete update_data[field]
+                }
+            });
+            update_data["is_deleted"];
+            update_data["create_at"];
+            logger.info(`${log_path} - end`);
+            return update_data;
+        } catch (err) {
+            logger.error(`${log_path} error - ${err}`);
+            throw err;
+        }
+    }
 
-module.exports = MongoDBProvider;
+    uuid2MongoId(object_id) {
+        let log_path = 'MongoDBProvider/uuid2MongoId';
+        logger.info(`${log_path} - start`);
+        try {
+            logger.info(`${log_path} - end`);
+            return new mongo.Binary(Buffer.from(object_id, 'utf8'));
+        } catch (err) {
+            logger.error(`${log_path} error - ${err}`);
+            throw err;
+        }
+    }
 
+};
 
+});
 

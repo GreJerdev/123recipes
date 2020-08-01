@@ -71,7 +71,7 @@ module.exports = class buyListItemsProvider {
     }
     try {
       let params = [list_id, item_id, type, quantity, unit, bought];
-      query = `
+      let query = `
         SET @list_id = fn_uuid_to_bin(?);
         SET @item_id = fn_uuid_to_bin(?);
         SET @item_type = ?;
@@ -111,7 +111,7 @@ module.exports = class buyListItemsProvider {
     }
     try {
       let params = [list_id, item_id];
-      query = `
+      let query = `
         SET @list_id = fn_uuid_to_bin(?);
         SET @item_id = fn_uuid_to_bin(?);
         

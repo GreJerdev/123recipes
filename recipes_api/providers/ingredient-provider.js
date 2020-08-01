@@ -70,7 +70,7 @@ CREATE TABLE `ingredients` (
         }
     }
 
-    updateIngredient() {
+    async updateIngredient(conn) {
         let log_path = 'IngredientProvider/updateIngredient -'
         let is_conn_external = true;
         try {
@@ -98,7 +98,7 @@ CREATE TABLE `ingredients` (
         }
     }
 
-    deleteIngredient() {
+    async deleteIngredient(conn) {
         let log_path = 'IngredientProvider/deleteIngredient -'
         let is_conn_external = true;
         try {
@@ -110,7 +110,6 @@ CREATE TABLE `ingredients` (
             let query = `
             
             `;
-            params = [new_recipe.id, new_recipe.name, new_recipe.parent || null, new_recipe.description];
             await mysql_provider.executeQueryWithConnection(conn,query , params);
             let result = await mysql_provider.executeQueryWithConnection(conn, this.select_by_id_query, [new_recipe.id]);
             if (!is_conn_external) {

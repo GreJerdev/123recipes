@@ -2,10 +2,7 @@
 
 module.exports = (request, response) => {
 
-    return (error,error_code) => {
-        if(!error_code){
-            error_code = 200;
-        }
+    return (error,error_code = 404 ) => {
         response.status(error_code);
         return response.send({
             "status": {
