@@ -1,0 +1,19 @@
+{
+    "db": {
+        "mysql": {
+            "type": "mysql",
+            "connection": {
+                "host": "localhost",
+                "user": "root",
+                "database": "123-recipe",
+                "password": "1qaz2wsx"
+            }
+        },
+        "mongodb": {
+            "connection_string": "mongodb://user:bzBv2bJirBnzSCi@ds117899.mlab.com:17899/buy_list",
+            "data_base": "buy_list"
+        },
+        "use": "mongodb"
+    }
+
+}
