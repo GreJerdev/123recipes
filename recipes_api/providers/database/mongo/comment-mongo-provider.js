@@ -20,7 +20,7 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 */
-    createComment(comment, conn = null){
+    async createComment(comment, conn = null){
         let is_external_connection = true;
         if (conn == null) {
           conn = await mysql_provider.getConnection();
@@ -64,7 +64,7 @@ CREATE TABLE `comments` (
         }
     }
 
-    updateComment(comment,conn = null){
+    async updateComment(comment,conn = null){
         let is_external_connection = true;
         if (conn == null) {
           conn = await mysql_provider.getConnection();
@@ -108,7 +108,7 @@ CREATE TABLE `comments` (
         }
     }
 
-    deleteComment(comment,conn = null){
+    async deleteComment(comment,conn = null){
         let is_external_connection = true;
         if (conn == null) {
           conn = await mysql_provider.getConnection();

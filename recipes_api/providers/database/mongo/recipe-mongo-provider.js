@@ -3,34 +3,9 @@
 let mysql_provider = require("./database/mysql_provider")();
 let models = require("../models/recipe-model");
 
-module.exports = class RecipeProvider {
+module.exports = class RecipeMongoProvider {
   constructor() {
-    this.insert_query = `SET @recipe_id = fn_uuid_to_bin(?) ;
-SET @recipe_name = ? ;
-SET @recipe_parent = ? ;
-SET @recipe_description = ? ;
-
-INSERT INTO recipes
-(recipe_id,
-recipe_parent,
-recipe_name,
-recipe_description)
-VALUES
-( 
-@recipe_id,
-@recipe_parent,
-@recipe_name,
-@recipe_description
-);`;
-    this.select_by_id_query = `SET @recipe_id = fn_uuid_to_bin(?);
-        select fn_uuid_from_bin(recipe_id) as recipe_id,
-        fn_uuid_from_bin(recipe_parent) as recipe_parent,
-        recipe_name,
-        recipe_description,
-        recipe_stars 
-        from recipes 
-        where recipe_id = @recipe_id  and recipe_is_deleted = 0`;
-  }
+    
 
     async createRecipe(new_recipe, conn = null) {
         let is_external_connection = true;
@@ -39,12 +14,7 @@ VALUES
             is_external_connection = false;
         }
         try {
-            const params = [
-                new_recipe.id,
-                new_recipe.name,
-                new_recipe.parent || null,
-                new_recipe.description
-            ];
+           
             await mysql_provider.executeQueryWithConnection(
                 conn,
                 this.insert_query,

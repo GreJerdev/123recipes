@@ -4,17 +4,6 @@ let mysql_provider = require("./database/mysql_provider")();
 
 module.exports = class buyListItemsProvider {
   constructor() { }
-/*CREATE TABLE `buy_list_to_items` (
-  `buy_list_to_items_buy_list_id` binary(16) NOT NULL,
-  `buy_list_item_item_id` binary(16) NOT NULL,
-  `buy_list_to_item_item_type` varchar(45) DEFAULT NULL,
-  `buy_list_to_item_quantity` int(10) DEFAULT NULL,
-  `buy_list_to_item_unit` varchar(45) DEFAULT NULL,
-  `buy_list_to_item_is_deleted` tinyint(1) DEFAULT '0',
-  `buy_list_to_item_bought` int(10) DEFAULT '0',
-  PRIMARY KEY (`buy_list_to_items_buy_list_id`,`buy_list_item_item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-*/
   async addItemToList(item_id, list_id, type, quantity, unit, conn = null) {
     let log_path = "buy_list_to_item_db_provider/createBuyListToItem -";
     let is_external_connection = true;
