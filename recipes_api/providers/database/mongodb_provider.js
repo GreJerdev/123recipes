@@ -5,12 +5,10 @@ const MongoClient = require('mongodb').MongoClient;
 const state = {
     db: null,
 };
-//const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const ObjectId = require('mongodb').ObjectId;
 const config = require("../../configuration/config");
 
-import {MongoClient} from 'mongodb';
 
 
 exports.MongoDBProvider = class MongoDBProvider {
