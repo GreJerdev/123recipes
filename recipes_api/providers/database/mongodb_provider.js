@@ -5,6 +5,10 @@ const MongoClient = require('mongodb').MongoClient;
 const state = {
     db: null,
 };
+const assert = require('assert');
+const ObjectId = require('mongodb').ObjectId;
+const config = require("../../configuration/config");
+
 
 
 exports.MongoDBProvider = class MongoDBProvider {
@@ -184,5 +188,6 @@ exports.MongoDBProvider = class MongoDBProvider {
     }
 
 };
+
 
 

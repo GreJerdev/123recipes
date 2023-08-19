@@ -3,7 +3,7 @@
 require('../utilities/logger');
 
 
-const  BuyList = require('../models/buy-list-model');
+const BuyList = require('../models/buy-list-model');
 const uuid = require('uuid/v4');
 let buyListDBProvider = require("./buy-list-provider");
 
